@@ -3,6 +3,12 @@ const ticketController = require('./../controller/ticketController');
 
 const router = express.Router();
 
+
+router
+    .route('/top')
+    .get(ticketController.aliasFilter, ticketController.allTickets);
+
+
 router
     .route('/')
     .get(ticketController.allTickets)
