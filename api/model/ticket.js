@@ -15,11 +15,10 @@ const ticketSchema = new mongoose.Schema({
     },
     createdBy: {
         type: String,
-        default: Date.now
     },
     createdOn: {
         type: Date,
-        required: false
+        default: Date.now()
     },
     lastEditedOn: {
         type: Date,
@@ -31,7 +30,7 @@ const ticketSchema = new mongoose.Schema({
     },
     status: {
         type: String,
-        required: true,
+        default: 'open'
     }
 });
 
