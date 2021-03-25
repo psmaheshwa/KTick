@@ -5,6 +5,7 @@ const logger = require('morgan');
 
 const usersRouter = require('./routes/usersRoute');
 const ticketsRouter = require("./routes/ticketsRoute");
+const AppError = require("./utils/AppError");
 
 const app = express();
 
@@ -18,8 +19,10 @@ app.use('/api/v1/users', usersRouter);
 app.use('/api/v1/tickets', ticketsRouter);
 
 
-// app.all('*', (req, res,next)=>{
-//     next(new AppError(`Can't find ${req.originalUrl}`,400));
+// app.all('*', (req, res, next) => {
+//     next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));
 // });
+
+// app.use(globalErrorHandler);
 
 module.exports = app;
