@@ -73,7 +73,7 @@ exports.redirect = ("/", (req, res) => {
                     });
                 }
             })
-            res.sendStatus(200);
+            res.send('<h1>Hello</h1>')
         })
         .catch((error) => {
             console.log(error);
