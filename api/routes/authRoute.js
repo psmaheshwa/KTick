@@ -9,29 +9,17 @@ var log = bunyan.createLogger({
     name: 'KTick'
 });
 
-passport.serializeUser(function(user, done) {
-    done(null, user.oid);
+passport.serializeUser((user, done) => {
+    done(null, user.id);
 });
 
-passport.deserializeUser(function(oid, done) {
-    findByOid(oid, function (err, user) {
-        done(err, user);
+passport.deserializeUser((id, done) => {
+    User.findById(id).then((user) => {
+        done(null, user);
     });
 });
 
 
-var users = [];
-
-var findByOid = function(oid, fn) {
-    for (var i = 0, len = users.length; i < len; i++) {
-        var user = users[i];
-        log.info('we are using user: ', user);
-        if (user.oid === oid) {
-            return fn(null, user);
-        }
-    }
-    return fn(null, null);
-};
 passport.use(new OIDCStrategy({
         identityMetadata: config.creds.identityMetadata,
         clientID: config.creds.clientID,
@@ -52,57 +40,55 @@ passport.use(new OIDCStrategy({
         cookieEncryptionKeys: config.creds.cookieEncryptionKeys,
         clockSkew: config.creds.clockSkew,
     },
-    function(iss, sub, profile, accessToken, refreshToken, done) {
-        if (!profile.oid) {
-            return done(new Error("No oid found"), null);
-        }
-        process.nextTick(function () {
-            findByOid(profile.oid, function(err, user) {
-                if (err) {
-                    return done(err);
-                }
-                if (!user) {
-                    users.push(profile);
-                    return done(null, profile);
-                }
-                return done(null, user);
-            });
+    function (iss, sub, profile, accessToken, refreshToken, done) {
+    console.log(profile)
+        User.findOne({uniqueId: profile.oid}).then((currentUser) => {
+            if (currentUser) {
+                console.log('user is: ', currentUser);
+                done(null, currentUser);
+            } else {
+                new User({
+                    uniqueId: profile.oid,
+                    name: profile.displayName,
+                    email: profile.upn
+                }).save().then((newUser) => {
+                    console.log('created new user: ', newUser);
+                    done(null, newUser);
+                });
+            }
         });
     }
 ));
 
 
-
-
-
-router.get('/', function(req, res) {
-    res.render('index', { user: req.user });
+router.get('/', function (req, res) {
+    res.render('index', {user: req.user});
 });
 
-router.get('/account', authController.ensureAuthenticated, function(req, res) {
+router.get('/account', authController.ensureAuthenticated, function (req, res) {
     console.log(req.user);
-    res.render('account', { user: req.user });
+    res.render('account', {user: req.user});
 });
 
 router.get('/login',
-    function(req, res, next) {
+    function (req, res, next) {
         passport.authenticate('azuread-openidconnect',
             {
-                response: res,                      // required
-                resourceURL: config.resourceURL,    // optional. Provide a value if you want to specify the resource.
-                customState: 'my_state',            // optional. Provide a value if you want to provide custom state value.
+                response: res,
+                resourceURL: config.resourceURL,
+                customState: 'my_state',
                 failureRedirect: '/'
             }
         )(req, res, next);
     },
-    function(req, res) {
+    function (req, res) {
         log.info('Login was called in the Sample');
         res.redirect('/api/v1');
     });
 
 
 router.get('/auth/openid/return',
-    function(req, res, next) {
+    function (req, res, next) {
         passport.authenticate('azuread-openidconnect',
             {
                 response: res,
@@ -110,13 +96,13 @@ router.get('/auth/openid/return',
             }
         )(req, res, next);
     },
-    function(req, res) {
+    function (req, res) {
         log.info('We received a return from AzureAD.');
         res.redirect('/api/v1');
     });
 
 router.post('/auth/openid/return',
-    function(req, res, next) {
+    function (req, res, next) {
         passport.authenticate('azuread-openidconnect',
             {
                 response: res,    // required
@@ -124,18 +110,17 @@ router.post('/auth/openid/return',
             }
         )(req, res, next);
     },
-    function(req, res) {
+    function (req, res) {
         log.info('We received a return from AzureAD.');
         res.redirect('/api/v1');
     });
 
-router.get('/logout', function(req, res){
-    req.session.destroy(function(err) {
+router.get('/logout', function (req, res) {
+    req.session.destroy(function (err) {
         req.logOut();
         res.redirect(config.destroySessionUrl);
     });
 });
-
 
 
 module.exports = router;

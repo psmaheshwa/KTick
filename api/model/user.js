@@ -4,7 +4,7 @@ const userSchema = new mongoose.Schema({
     name: {
         type: String
     },
-    id: {
+    uniqueId: {
         type: String
     },
     role: {
