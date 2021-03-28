@@ -1,6 +1,6 @@
 const express = require('express');
 const ticketController = require('./../controller/ticketController');
-
+const authController = require("../controller/authController");
 const router = express.Router();
 
 
@@ -11,7 +11,7 @@ router
 
 router
     .route('/')
-    .get(ticketController.allTickets)
+    .get(authController.ensureAuthenticated,ticketController.allTickets)
     .post(ticketController.createTicket);
 router
     .route('/:id')

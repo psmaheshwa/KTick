@@ -19,13 +19,15 @@ exports.allTickets = catchAsync(async (req, res, next) => {
         .paginate();
     const tickets = await features.query;
 
-    res.status(200).json({
-        status: 'success',
-        results: tickets.length,
-        data: {
-            tickets
-        }
-    });
+
+    res.send(tickets);
+    // res.status(200).json({
+    //     status: 'success',
+    //     results: tickets.length,
+    //     data: {
+    //         tickets
+    //     }
+    // });
 });
 
 exports.createTicket = catchAsync(async (req, res, next) => {

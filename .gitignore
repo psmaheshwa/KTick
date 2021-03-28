@@ -1,4 +1,4 @@
 # Project exclude paths
 /api/node_modules/
 /api/config.env
-/api/config.js
+/api/utils/config.js
