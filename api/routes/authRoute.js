@@ -6,7 +6,7 @@ const config = require('./../utils/config');
 const User = require('./../model/user');
 const OIDCStrategy = require('passport-azure-ad').OIDCStrategy;
 var log = bunyan.createLogger({
-    name: 'Microsoft OIDC Example Web Application'
+    name: 'KTick'
 });
 
 passport.serializeUser(function(user, done) {
