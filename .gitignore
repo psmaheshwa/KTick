@@ -2,3 +2,4 @@
 /api/node_modules/
 /api/config.env
 /bot/node_modules
+/frontend/node_modules
