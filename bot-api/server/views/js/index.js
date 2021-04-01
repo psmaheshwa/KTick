@@ -65,7 +65,6 @@ function insertMessage() {
 document.getElementById("mymsg").onsubmit = (e)=>{
   e.preventDefault() 
   insertMessage();
-  serverMessage("hello");
 }
 
 function serverMessage(response2) {
@@ -89,7 +88,7 @@ function serverMessage(response2) {
 
 function fetchmsg(){
 
-     var url = 'http://localhost:5000/send-msg';
+     var url = 'http://localhost:3000/chatbot/';
       
       const data = new URLSearchParams();
       for (const pair of new FormData(document.getElementById("mymsg"))) {
@@ -104,10 +103,7 @@ function fetchmsg(){
         }).then(res => res.json())
          .then(response => {
           console.log(response);
-        //  serverMessage(response.Reply);
-          speechSynthesis.speak( new SpeechSynthesisUtterance(response.Reply))
-        
-          
+          serverMessage(response.Reply);    
          })
           .catch(error => console.error('Error h:', error));
 

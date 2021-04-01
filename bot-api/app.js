@@ -5,6 +5,10 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+// user built modules
+const indexRouter = require('./server/routers/indexRouter');
+const corsMiddleware = require('./server/middlewares/corsMiddleware');
+
 // Initiating app
 var app = express();
 
@@ -14,6 +18,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+// cors  middleware
+app.use(corsMiddleware.corsFuction);
 
 // Primary Router
 app.use('/chatbot', indexRouter);
