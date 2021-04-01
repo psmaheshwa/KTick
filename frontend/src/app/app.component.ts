@@ -9,16 +9,4 @@ import {FormGroup} from "@angular/forms";
 })
 export class AppComponent {
   title = 'KTick';
-  loginForm: FormGroup;
-  constructor(private apiService: ApiService) {
-  }
-
-  submit() {
-    this.apiService.getApiData().subscribe(data=>{
-      console.log(data);
-      if(!data){
-
-      }
-    });
-  }
 }
