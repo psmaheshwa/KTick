@@ -41,7 +41,8 @@ passport.use(new OIDCStrategy({
         clockSkew: config.creds.clockSkew,
     },
     function (iss, sub, profile, accessToken, refreshToken, done) {
-    console.log(profile)
+    // console.log(profile)
+        console.log("Access Token: "+accessToken);
         User.findOne({uniqueId: profile.oid}).then((currentUser) => {
             if (currentUser) {
                 console.log('user is: ', currentUser);
@@ -66,7 +67,7 @@ router.get('/', function (req, res) {
 });
 
 router.get('/account', authController.ensureAuthenticated, function (req, res) {
-    console.log(req.user);
+    // console.log(req.user);
     res.render('account', {user: req.user});
 });
 

@@ -1,6 +1,6 @@
 const express = require('express');
 const ticketController = require('./../controller/ticketController');
-const authController = require("../controller/authController");
+const {ensureAuthenticated, restrictTo} = require("../controller/authController");
 const router = express.Router();
 
 
@@ -11,12 +11,12 @@ router
 
 router
     .route('/')
-    .get(authController.ensureAuthenticated,ticketController.allTickets)
-    .post(ticketController.createTicket);
+    .get(ensureAuthenticated, restrictTo('admin', 'user'), ticketController.allTickets)
+    .post(ensureAuthenticated, restrictTo('admin', 'user'), ticketController.createTicket);
 router
     .route('/:id')
-    .get(ticketController.getTicket)
-    .patch(ticketController.updateTicket)
-    .delete(ticketController.deleteTicket);
+    .get(ensureAuthenticated, restrictTo('admin', 'user'), ticketController.getTicket)
+    .patch(ensureAuthenticated, restrictTo('admin', 'user'), ticketController.updateTicket)
+    .delete(ensureAuthenticated, restrictTo('admin', 'user'), ticketController.deleteTicket);
 
 module.exports = router;

@@ -13,7 +13,7 @@ const mongoose = require('mongoose');
 const usersRouter = require('./routes/usersRoute');
 const ticketsRouter = require("./routes/ticketsRoute");
 const authRouter = require('./routes/authRoute');
-
+const projectRouter = require('./routes/projectRoute');
 
 
 const app = express();
@@ -24,7 +24,6 @@ app.use(morgan('dev'));
 app.use(methodOverride());
 app.use(cookieParser());
 
-// set up session middleware
 if (config.useMongoDBSessionStore) {
     app.use(express.session({
         secret: 'secret',
@@ -35,19 +34,23 @@ if (config.useMongoDBSessionStore) {
         })
     }));
 } else {
-    app.use(expressSession({ secret: 'keyboard cat', resave: true, saveUninitialized: false }));
+    app.use(expressSession({secret: 'keyboard cat', resave: true, saveUninitialized: false}));
 }
 
-app.use(express.urlencoded({ extended : true }));
+app.use(express.urlencoded({extended: true}));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.static(__dirname + '/../../public'));
 
-
+app.use(function (req, res, next) {
+    res.locals.user = req.user;
+    next();
+});
 
 
 app.use('/api/v1', authRouter);
 app.use('/api/v1/users', usersRouter);
 app.use('/api/v1/tickets', ticketsRouter);
+app.use('/api/v1/projects', projectRouter);
 
 module.exports = app;
