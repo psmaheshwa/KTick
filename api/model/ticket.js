@@ -15,11 +15,12 @@ const ticketSchema = new mongoose.Schema({
         minlength: [10, 'A Ticket description must have less or equal then 10 characters']
     },
     assignedTo: {
-        type: String,
-        required: false
+        type: mongoose.Schema.ObjectId,
+        ref: 'User'
     },
     createdBy: {
-        type: String,
+        type: mongoose.Schema.ObjectId,
+        ref: 'User'
     },
     createdOn: {
         type: Date,
@@ -40,6 +41,10 @@ const ticketSchema = new mongoose.Schema({
         default: 0,
         min: 0,
         max: 1
+    },
+    projectID:{
+        type: mongoose.Schema.ObjectId,
+        ref: 'Project'
     }
 },{
     toJSON: { virtuals : true},
