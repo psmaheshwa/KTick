@@ -5,6 +5,10 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+// user built modules
+const indexRouter = require('./server/routers/indexRouter');
+const corsMiddleware = require('./server/middlewares/corsMiddleware');
+
 // Initiating app
 var app = express();
 
@@ -15,9 +19,11 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// cors  middleware
+app.use(corsMiddleware.corsFuction);
+
 // Primary Router
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/chatbot', indexRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
