@@ -3,6 +3,9 @@ const ApiFeatures = require('./../utils/apifeatures');
 const catchAsync = require('./catchAsync');
 const AppError = require('./../utils/AppError');
 
+
+
+
 exports.allUsers = catchAsync(async (req, res, next) => {
     const features = new ApiFeatures(User.find(), req.query)
         .filter()
@@ -34,7 +37,6 @@ exports.getUser = catchAsync(async (req, res, next) => {
 exports.updateUser = catchAsync(async (req, res, next) => {
 
     let updatedUser = req.body;
-    updatedUser.lastEditedOn = Date.now();
     await User.findByIdAndUpdate(req.params.id, updatedUser);
     res.status(201).json({
         status: 'Updated',
@@ -52,3 +54,30 @@ exports.deleteUser = catchAsync(async (req, res, next) => {
         data: null
     })
 });
+
+exports.createUser = catchAsync(async (req, res, next) => {
+    let user = await User.findById(req.body.id);
+    if (!user) {
+        new User({
+            uniqueId: req.body.oid,
+            name: req.body.displayName,
+            email: req.body.upn
+        }).save().then((newUser) => {
+            res.status(201).json({
+                status:'Success',
+                data:{
+                    newUser
+                }
+            });
+        });
+    }else{
+        res.status(201).json({
+            status:'Success',
+            data:{
+                user
+            }
+        });
+    }
+
+});
+

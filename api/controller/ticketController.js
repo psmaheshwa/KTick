@@ -10,6 +10,16 @@ exports.aliasFilter = (req, res, next) => {
     next();
 }
 
+exports.createdByMe = (req, res, next) => {
+    req.query = {'createdBy' : req.user.id}
+    next();
+}
+
+exports.assignedToMe = (req, res, next) => {
+    req.query = {'assignedTo' : req.user.id}
+    next();
+}
+
 exports.allTickets = catchAsync(async (req, res, next) => {
     const features = new ApiFeatures(Ticket.find(), req.query)
         .filter()
@@ -17,7 +27,6 @@ exports.allTickets = catchAsync(async (req, res, next) => {
         .limitFields()
         .paginate();
     const tickets = await features.query;
-
 
     // res.send(tickets);
     res.status(200).json({
@@ -32,7 +41,7 @@ exports.allTickets = catchAsync(async (req, res, next) => {
 exports.createTicket = catchAsync(async (req, res, next) => {
     let newTicket = req.body;
     newTicket.lastEditedOn = Date.now();
-    newTicket.createdBy = req.user.id;
+    // newTicket.createdBy = req.user.id;
 
     await Ticket.create(newTicket);
 
@@ -44,7 +53,7 @@ exports.createTicket = catchAsync(async (req, res, next) => {
 });
 
 exports.getTicket = catchAsync(async (req, res, next) => {
-    const ticket = await Ticket.findById(req.params.id);
+    const ticket = await Ticket.findById(req.params.id).populate(['createdBy','assignedTo','projectID']);
     if (!ticket) {
         return next(new AppError('Ticket not found', 404));
     }

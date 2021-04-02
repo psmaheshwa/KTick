@@ -8,6 +8,7 @@ const morgan = require('morgan');
 let MongoStore = require('connect-mongo');
 const mongoose = require('mongoose');
 const cors = require('cors');
+const bp = require("body-parser");
 
 
 const usersRouter = require('./routes/usersRoute');
@@ -25,6 +26,8 @@ app.set('view engine', 'ejs');
 app.use(morgan('dev'));
 app.use(methodOverride());
 app.use(cookieParser());
+app.use(bp.json());
+app.use(bp.urlencoded({ extended: true }));
 // app.use((req, res, next) => {
 //     res.header('Access-Control-Allow-Origin', '*');
 //     next();

@@ -48,8 +48,8 @@ exports.deleteProject = catchAsync(async (req, res, next) => {
 });
 
 exports.createProject = catchAsync(async (req, res, next) => {
-    let newProject = req.body;
-    await Project.create(newProject);
+    console.log(req.body);
+    const newProject = await Project.create(req.body);
 
     res.status(201).json({
         status: 'Success',

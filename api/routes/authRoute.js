@@ -63,20 +63,20 @@ passport.use(new OIDCStrategy({
 
 
 router.get('/', function (req, res) {
-    // res.render('index', {user: req.user});
-    res.status(200).json({
-        status: 'Success',
-        user: req.user
-    })
+    res.render('index', {user: req.user});
+    // res.status(200).json({
+    //     status: 'Success',
+    //     user: req.user
+    // })
 });
 
 router.get('/account', authController.ensureAuthenticated, function (req, res) {
     // console.log(req.user);
-    // res.render('account', {user: req.user});
-    res.status(200).json({
-        status: 'Success',
-        user: req.user
-    });
+    res.render('account', {user: req.user});
+    // res.status(200).json({
+    //     status: 'Success',
+    //     user: req.user
+    // });
 });
 
 router.get('/login',
