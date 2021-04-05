@@ -9,6 +9,15 @@ router
     .get(ticketController.aliasFilter, ticketController.allTickets);
 
 
+
+router
+    .route('/created')
+    .get(ensureAuthenticated,ticketController.createdByMe, ticketController.allTickets);
+
+router
+    .route('/assigned')
+    .get(ensureAuthenticated,ticketController.assignedToMe, ticketController.allTickets);
+
 router
     .route('/')
     .get(ensureAuthenticated, restrictTo('admin', 'user'), ticketController.allTickets)

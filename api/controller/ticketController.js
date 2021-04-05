@@ -10,6 +10,16 @@ exports.aliasFilter = (req, res, next) => {
     next();
 }
 
+exports.createdByMe = (req, res, next) => {
+    req.query = {'createdBy' : req.user.id}
+    next();
+}
+
+exports.assignedToMe = (req, res, next) => {
+    req.query = {'assignedTo' : req.user.id}
+    next();
+}
+
 exports.allTickets = catchAsync(async (req, res, next) => {
     const features = new ApiFeatures(Ticket.find(), req.query)
         .filter()
