@@ -37,6 +37,24 @@ exports.totalMedium = catchAsync(async (req, res, next) => {
 exports.totalLow = catchAsync(async (req, res, next) => {
     req.query = {'priority': -1, 'assignedTo': req.user.id};
     const count = await Ticket.countDocuments(req.query);
+    res.status(200).json({count});
+});
+
+exports.todayTickets = catchAsync(async (req, res, next) => {
+    const start = new Date();
+    start.setHours(0,0,0,0);
+    const end = new Date();
+    end.setHours(23,59,59,999);
+    const count = await Ticket.countDocuments({'dueDate':{$gte: start,$lt: end}, 'status':0});
+    res.status(200).json({count})
+});
+
+exports.dueExceeded = catchAsync(async (req, res, next) => {
+    const start = new Date();
+    start.setHours(0,0,0,0);
+    const end = new Date();
+    end.setHours(23,59,59,999);
+    const count = await Ticket.countDocuments({'dueDate':{$lte: start}, 'status':0});
     res.status(200).json({count})
 });
 
