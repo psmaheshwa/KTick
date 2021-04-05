@@ -88,7 +88,7 @@ exports.allTickets = catchAsync(async (req, res, next) => {
 exports.createTicket = catchAsync(async (req, res, next) => {
     let newTicket = req.body;
     newTicket.lastEditedOn = Date.now();
-    newTicket.createdBy = req.user.id;
+    // newTicket.createdBy = req.user.id;
 
     await Ticket.create(newTicket);
 
@@ -100,7 +100,7 @@ exports.createTicket = catchAsync(async (req, res, next) => {
 });
 
 exports.getTicket = catchAsync(async (req, res, next) => {
-    const ticket = await Ticket.findById(req.params.id);
+    const ticket = await Ticket.findById(req.params.id).populate(['createdBy','assignedTo','projectID']);
     if (!ticket) {
         return next(new AppError('Ticket not found', 404));
     }
