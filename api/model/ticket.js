@@ -45,6 +45,10 @@ const ticketSchema = new mongoose.Schema({
     projectID:{
         type: mongoose.Schema.ObjectId,
         ref: 'Project'
+    },
+    dueDate: {
+        type: Date,
+        default: new Date(+new Date() + 24*60*60*1000)
     }
 },{
     toJSON: { virtuals : true},
