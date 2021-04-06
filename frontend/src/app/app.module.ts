@@ -8,6 +8,8 @@ import {MatButtonModule} from "@angular/material/button";
 import {ReactiveFormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
 import { LoginModule } from './login/login.module';
+import { DashboardModule } from './dashboard/dashboard.module';
+
 
 
 @NgModule({
@@ -21,7 +23,8 @@ import { LoginModule } from './login/login.module';
     MatButtonModule,
     ReactiveFormsModule,
     HttpClientModule,
-    LoginModule
+    LoginModule,
+    DashboardModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

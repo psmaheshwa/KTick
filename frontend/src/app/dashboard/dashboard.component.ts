@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MsalService } from '@azure/msal-angular';
 
 @Component({
   selector: 'app-dashboard',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor() { }
+  constructor(private msalService: MsalService) {
+  }
+
+  temp = this.msalService.instance.getActiveAccount().username;
 
   ngOnInit(): void {
   }
+
 
 }
