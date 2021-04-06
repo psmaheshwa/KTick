@@ -1,0 +1,31 @@
+.example-container {
+    width: 400px;
+    height: 200px;
+    margin: 10px;
+    border: 1px solid #555;
+  }
+.bod li{
+display: inline;
+margin-top: 10px;
+margin-left: 25%;
+}
+
+.nav li{
+   
+   
+    font-size: 12;
+    font-family:Georgia, 'Times New Roman', Times, serif
+    
+}
+.nav{
+    margin-left: 70%;
+}
+#log:hover{
+    color: rgb(136, 20, 121);
+}
+#song:hover{
+    color: rgb(136, 20, 121);
+    }
+#sign:hover{
+        color: rgb(136, 20, 121);
+}
