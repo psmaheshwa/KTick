@@ -23,7 +23,7 @@ export function MSALInstanceFactory(): IPublicClientApplication{
     CommonModule,
     LoginRoutingModule,
     MaterialModule,
-    MsalModule
+    MsalModule,
   ],
   providers:[
     {
