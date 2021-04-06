@@ -7,9 +7,8 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatButtonModule} from "@angular/material/button";
 import {ReactiveFormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
+import { LoginModule } from './login/login.module';
 
-// inbuilt modules
-import { LoginModule } from './modules/login/login.module';
 
 @NgModule({
   declarations: [
@@ -22,8 +21,6 @@ import { LoginModule } from './modules/login/login.module';
     MatButtonModule,
     ReactiveFormsModule,
     HttpClientModule,
-
-    // inbuilt modules
     LoginModule
   ],
   providers: [],
