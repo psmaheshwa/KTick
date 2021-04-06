@@ -1,18 +1,15 @@
-<form>
-    <mat-card><mat-card-header>
-        <div mat-card-avatar class="header-image"></div></mat-card-header>
-        <mat-card-content>
-    <div class="input">
-        <label>Username</label>
-        <input type="text" id="username" [(ngModel)]="username" value="">
-    </div>
-    <div class="input">
-        <label>Password</label>
-        <input type="password" id="password" [(ngModel)]="password" value="" >
-    </div>
-        </mat-card-content>
-    <mat-card-footer text-center>
-   <button mat-raised-button color='accent' (click)="loginUser()">Login</button></mat-card-footer>
+<mat-toolbar color="primary">
+    
+      <span class="tool-head"></span>
+      
+    </mat-toolbar>
+    <body>
+        <mat-card><mat-card-header>
+            Welcome to KTick</mat-card-header>
+            <mat-card-content>
+                
+                <button mat-raised-button color="primary">Sign-In</button>
 
-</mat-card>
-</form>
+            </mat-card-content>
+        </mat-card>
+    </body>
