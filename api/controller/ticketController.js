@@ -10,6 +10,64 @@ exports.aliasFilter = (req, res, next) => {
     next();
 }
 
+exports.totalOpened = catchAsync(async (req, res, next) => {
+    req.query = {'status': 0, 'assignedTo': req.user.id};
+    const count = await Ticket.countDocuments(req.query);
+    res.status(200).json({count})
+});
+
+exports.totalClosed = catchAsync(async (req, res, next) => {
+    req.query = {'status': 1, 'assignedTo': req.user.id};
+    const count = await Ticket.countDocuments(req.query);
+    res.status(200).json({count})
+});
+
+exports.totalHigh = catchAsync(async (req, res, next) => {
+    req.query = {'priority': 1, 'assignedTo': req.user.id};
+    const count = await Ticket.countDocuments(req.query);
+    res.status(200).json({count})
+});
+
+exports.totalMedium = catchAsync(async (req, res, next) => {
+    req.query = {'priority': 0, 'assignedTo': req.user.id};
+    const count = await Ticket.countDocuments(req.query);
+    res.status(200).json({count})
+});
+
+exports.totalLow = catchAsync(async (req, res, next) => {
+    req.query = {'priority': -1, 'assignedTo': req.user.id};
+    const count = await Ticket.countDocuments(req.query);
+    res.status(200).json({count});
+});
+
+exports.todayTickets = catchAsync(async (req, res, next) => {
+    const start = new Date();
+    start.setHours(0,0,0,0);
+    const end = new Date();
+    end.setHours(23,59,59,999);
+    const count = await Ticket.countDocuments({'dueDate':{$gte: start,$lt: end}, 'status':0});
+    res.status(200).json({count})
+});
+
+exports.dueExceeded = catchAsync(async (req, res, next) => {
+    const start = new Date();
+    start.setHours(0,0,0,0);
+    const end = new Date();
+    end.setHours(23,59,59,999);
+    const count = await Ticket.countDocuments({'dueDate':{$lte: start}, 'status':0});
+    res.status(200).json({count})
+});
+
+exports.createdByMe = (req, res, next) => {
+    req.query = {'createdBy': req.user.id}
+    next();
+}
+
+exports.assignedToMe = (req, res, next) => {
+    req.query = {'assignedTo': req.user.id}
+    next();
+}
+
 exports.allTickets = catchAsync(async (req, res, next) => {
     const features = new ApiFeatures(Ticket.find(), req.query)
         .filter()
@@ -18,8 +76,6 @@ exports.allTickets = catchAsync(async (req, res, next) => {
         .paginate();
     const tickets = await features.query;
 
-
-    // res.send(tickets);
     res.status(200).json({
         status: 'success',
         results: tickets.length,
@@ -32,7 +88,7 @@ exports.allTickets = catchAsync(async (req, res, next) => {
 exports.createTicket = catchAsync(async (req, res, next) => {
     let newTicket = req.body;
     newTicket.lastEditedOn = Date.now();
-    newTicket.createdBy = req.user.id;
+    // newTicket.createdBy = req.user.id;
 
     await Ticket.create(newTicket);
 
@@ -44,7 +100,7 @@ exports.createTicket = catchAsync(async (req, res, next) => {
 });
 
 exports.getTicket = catchAsync(async (req, res, next) => {
-    const ticket = await Ticket.findById(req.params.id);
+    const ticket = await Ticket.findById(req.params.id).populate(['createdBy','assignedTo','projectID']);
     if (!ticket) {
         return next(new AppError('Ticket not found', 404));
     }

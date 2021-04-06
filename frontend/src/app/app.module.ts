@@ -8,6 +8,9 @@ import {MatButtonModule} from "@angular/material/button";
 import {ReactiveFormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
 
+// inbuilt modules
+import { LoginModule } from './modules/login/login.module';
+
 @NgModule({
   declarations: [
     AppComponent
@@ -18,7 +21,10 @@ import {HttpClientModule} from "@angular/common/http";
     BrowserAnimationsModule,
     MatButtonModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+
+    // inbuilt modules
+    LoginModule
   ],
   providers: [],
   bootstrap: [AppComponent]
