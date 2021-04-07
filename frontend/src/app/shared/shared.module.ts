@@ -3,13 +3,18 @@ import { CommonModule } from '@angular/common';
 
 import { SharedRoutingModule } from './shared-routing.module';
 import { SharedComponent } from './shared.component';
+import { MaterialModule } from '../material/material.module';
 
 
 @NgModule({
   declarations: [SharedComponent],
   imports: [
     CommonModule,
-    SharedRoutingModule
+    SharedRoutingModule,
+    MaterialModule
+  ],
+  exports:[
+    SharedComponent
   ]
 })
 export class SharedModule { }

@@ -10,22 +10,13 @@ margin-top: 10px;
 margin-left: 25%;
 }
 
-.nav li{
-   
-   
-    font-size: 12;
-    font-family:Georgia, 'Times New Roman', Times, serif
-    
-}
-.nav{
-    margin-left: 70%;
-}
-#log:hover{
+
+#assigned:hover{
     color: rgb(136, 20, 121);
 }
-#song:hover{
+#created:hover{
     color: rgb(136, 20, 121);
     }
-#sign:hover{
+#newT:hover{
         color: rgb(136, 20, 121);
 }

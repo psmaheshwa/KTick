@@ -1,0 +1,34 @@
+.example-container {
+    width: 100%;
+    height: 100%;
+    border: 1px solid rgba(131, 47, 228, 0.5);
+
+  }
+
+  
+  .sidenav-content {
+   
+    height: 100%;
+    align-items:top;
+    justify-content: center;
+    background-color: grey;
+  }
+  
+  .example-sidenav {
+    padding: 40px;
+    background-color: grey;
+  }
+  .menu{
+      margin-top: 20px;
+     font-size: small;
+      background-size: cover;
+  }
+.nav{
+    padding: 40px;
+display: list-item;
+text-decoration: none;
+list-style: none;
+line-height: 3rem;
+height: 20px;
+width: 20px;
+  }
