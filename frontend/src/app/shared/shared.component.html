@@ -1,1 +1,27 @@
-<p>shared works!</p>
+
+<mat-drawer-container class="example-container" autosize>
+  <mat-drawer #drawer class="example-sidenav" mode="side">
+
+     
+     <ul class="nav"> 
+        <li><button  mat-raised-button color='accent'>
+        Dashboard
+      </button></li> 
+      <li><button  mat-raised-button color='accent'>
+        Tickets 
+      </button></li> 
+      <li> <button  mat-raised-button color='accent'>
+        Users
+      </button></li> 
+    </ul>
+    </mat-drawer>
+  
+    <div class="sidenav-content">
+      <button class="menu" mat-raised-button color='accent' (click)="drawer.toggle()">
+       KTick 
+       
+      </button>
+    </div>
+  
+  </mat-drawer-container>
+  
