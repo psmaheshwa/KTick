@@ -4,12 +4,12 @@ const {ensureAuthenticated, restrictTo} = require('./../controller/authControlle
 const userController = require('./../controller/userController');
 
 router
-    .route('/').get( userController.allUsers)
-    .post(userController.createUser);
+    .route('/').get( ensureAuthenticated,userController.allUsers)
+    .post(ensureAuthenticated,restrictTo('admin'),userController.createUser);
 
 router
-    .route('/:id').get(userController.getUser)
-    .patch(userController.updateUser)
-    .delete(userController.deleteUser);
+    .route('/:id').get(ensureAuthenticated,userController.getUser)
+    .patch(ensureAuthenticated, restrictTo('admin'),userController.updateUser)
+    .delete(ensureAuthenticated, restrictTo('admin'),userController.deleteUser);
 
 module.exports = router;
