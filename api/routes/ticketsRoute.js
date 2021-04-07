@@ -19,12 +19,12 @@ router.route('/assigned').get(ensureAuthenticated, ticketController.assignedToMe
 
 router
     .route('/')
-    .get(ticketController.allTickets)
-    .post(ticketController.createTicket);
+    .get(ensureAuthenticated,ticketController.allTickets)
+    .post(ensureAuthenticated,ticketController.createTicket);
 router
     .route('/:id')
-    .get(ticketController.getTicket)
-    .patch(ticketController.updateTicket)
-    .delete(ticketController.deleteTicket);
+    .get(ensureAuthenticated,ticketController.getTicket)
+    .patch(ensureAuthenticated,ticketController.updateTicket)
+    .delete(ensureAuthenticated,ticketController.deleteTicket);
 
 module.exports = router;

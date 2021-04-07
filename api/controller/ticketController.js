@@ -88,8 +88,7 @@ exports.allTickets = catchAsync(async (req, res, next) => {
 exports.createTicket = catchAsync(async (req, res, next) => {
     let newTicket = req.body;
     newTicket.lastEditedOn = Date.now();
-    // newTicket.createdBy = req.user.id;
-
+    newTicket.createdBy = req.user.id;
     await Ticket.create(newTicket);
 
     res.status(201).json({
@@ -135,4 +134,3 @@ exports.deleteTicket = catchAsync(async (req, res, next) => {
         data: null
     })
 });
-

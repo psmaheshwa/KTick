@@ -6,12 +6,12 @@ const router = express.Router();
 
 router
     .route('/')
-    .get(projectController.allProjects)
-    .post(projectController.createProject);
+    .get(ensureAuthenticated,projectController.allProjects)
+    .post(ensureAuthenticated, restrictTo('admin'),projectController.createProject);
 router
     .route('/:id')
-    .get(projectController.getProject)
-    .patch(projectController.updateProject)
-    .delete(projectController.deleteProject);
+    .get(ensureAuthenticated,projectController.getProject)
+    .patch(ensureAuthenticated, restrictTo('admin'),projectController.updateProject)
+    .delete(ensureAuthenticated, restrictTo('admin'),projectController.deleteProject);
 
 module.exports = router;
