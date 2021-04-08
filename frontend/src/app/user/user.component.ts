@@ -16,6 +16,8 @@ const users: User[] = [
   {uniqueId: 8, name: 'Surya', role:'user', email:'Surya@gmail.com'},
   {uniqueId: 9, name: 'Raja', role:'user', email:'Raja@gmail.com'},
   {uniqueId: 10, name: 'Ram', role:'user', email:'Ram@gmail.com'},
+  {uniqueId: 11, name: 'Ramana', role:'user', email:'Ramana@gmail.com'},
+
 ];
 
 @Component({
