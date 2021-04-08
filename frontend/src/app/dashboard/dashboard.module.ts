@@ -21,7 +21,7 @@ import { CardComponent } from './card/card.component';
 
 
 @NgModule({
-  declarations: [DashboardComponent, CardComponent],
+  declarations: [DashboardComponent,CardComponent],
   imports: [
     CommonModule,
     DashboardRoutingModule,
