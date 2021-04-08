@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { map } from 'rxjs/operators';
+import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
 import { MsalService } from '@azure/msal-angular';
 
 @Component({
@@ -6,15 +8,29 @@ import { MsalService } from '@azure/msal-angular';
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent  {
+  
+cardLayout = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
+   map(({ matches }) => {
+     if (matches) {
+       return {
+         columns: 1,
+         miniCard: { cols: 1, rows: 1 },
+         chart: { cols: 1, rows: 2 },
+         
+       };
+     }
 
-  constructor(private msalService: MsalService) {
-  }
+    return {
+       columns: 4,
+       miniCard: { cols: 1, rows: 1 },
+       chart: { cols: 2, rows: 2 },
+       
+     };
+   })
+ );
 
-  temp = this.msalService.instance.getActiveAccount().username;
 
-  ngOnInit(): void {
-  }
-
-
+  constructor(private breakpointObserver: BreakpointObserver,
+  private msalService: MsalService) {}
 }
