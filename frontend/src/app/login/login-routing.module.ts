@@ -13,7 +13,7 @@ const routes: Routes = [
   {
     path: 'auth',
     loadChildren: () => import('../dashboard/dashboard.module').then(m => m.DashboardModule),
-    canActivate: [MsalGuard]
+    //canActivate: [MsalGuard]
   }
 ];  
 
