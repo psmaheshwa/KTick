@@ -1,20 +1,26 @@
 <div style="width: 100%">
+    <button mat-raised-button color='accent' [matMenuTriggerFor]="menu">Project</button>
+<mat-menu color="accent" #menu="matMenu">
+  <button mat-menu-item>KTick</button>
+  <button mat-menu-item>Sales</button>
+</mat-menu>
+
   <ul class="blist">
     <li id="created">
-      <mat-button-toggle-group [(value)] = "selectedValue" #group="matButtonToggleGroup" multiple=false>
-        <mat-button-toggle  *ngFor="let item of toggleOptions;" (change)="selectionChanged($event)" [value]="item">{{item}}</mat-button-toggle>      </mat-button-toggle-group>
+      <mat-button-toggle-group  appearance="legacy"   [(value)] = "selectedValue" #group="matButtonToggleGroup" multiple=false>
+        <mat-button-toggle class="tbutton" value="bold" *ngFor="let item of toggleOptions;" (change)="selectionChanged($event)" [value]="item">{{item}}</mat-button-toggle>      </mat-button-toggle-group>
     </li>
     <li id="add">
       <button mat-mini-fab color="accent">+</button>
     </li>
   </ul>
-  <div style="width: 70%">
-    <mat-form-field>
+  <div style="width:50%">
+    <mat-form-field id="filter">
       <mat-label>Filter</mat-label>
       <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Ticket Name" #input>
     </mat-form-field>
 
-    <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+    <table id="Ttable" mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
 
       <ng-container matColumnDef="title">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Title</th>
@@ -58,7 +64,7 @@
       </tr>
 
     </table>
-    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+    <mat-paginator id="pgn" [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
 
   </div>
 </div>
