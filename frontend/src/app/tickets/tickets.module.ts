@@ -2,14 +2,19 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { TicketsRoutingModule } from './tickets-routing.module';
-import { TicketsComponent } from '../tickets/tickets.component';
+import { TicketsComponent } from './tickets.component';
+import {MaterialModule} from "../material/material.module";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 
 
 @NgModule({
   declarations: [TicketsComponent],
   imports: [
     CommonModule,
-    TicketsRoutingModule
+    TicketsRoutingModule,
+    MaterialModule,
+    ReactiveFormsModule,
+    FormsModule
   ]
 })
 export class TicketsModule { }

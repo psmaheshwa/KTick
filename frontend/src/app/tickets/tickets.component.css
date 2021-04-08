@@ -1,22 +1,13 @@
-.example-container {
-    width: 400px;
-    height: 200px;
-    margin: 10px;
-    border: 1px solid #555;
-  }
-.bod li{
-display: inline;
-margin-top: 10px;
-margin-left: 25%;
-}
-
-
 #assigned:hover{
-    color: rgb(136, 20, 121);
+    color: black;
+   
 }
-#created:hover{
-    color: rgb(136, 20, 121);
-    }
-#newT:hover{
-        color: rgb(136, 20, 121);
+ul{
+   display: inline;
+   margin-top: 20px;
+}
+li{
+    display: inline;
+    padding-left: 20px;
+    padding-top: 10px;
 }
