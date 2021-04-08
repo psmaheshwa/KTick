@@ -1,6 +1,4 @@
-.grid-container {
-  /*background-color: rgb(85, 81, 81);*/
-}
+ 
 
 .dashboard-card {
   position: absolute;
@@ -22,5 +20,5 @@
 }
 
 .mat-grid-list{
-  margin-left: 15%;
+  margin-left: 2%;
 }
