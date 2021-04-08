@@ -1,10 +1,10 @@
-<div style="width: 70%">
-  <mat-form-field>
+<div style="width: 50%">
+  <mat-form-field id="filter">
     <mat-label>Filter</mat-label>
     <input matInput (keyup)="applyFilter($event)" placeholder="Ex. user@company.com" #input>
   </mat-form-field>
 
-  <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+  <table id="Utable" mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
 
     <ng-container matColumnDef="uniqueId">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> No. </th>
@@ -34,6 +34,6 @@
     </tr>
 
   </table>
-  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+  <mat-paginator id="pgn" [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
 
 </div>
