@@ -18,7 +18,14 @@ export class AuthService {
   constructor(private msalService: MsalService, private router: Router) {
   }
 
-  account: any
+
+  getAccess_token(): string {
+    return localStorage.getItem('Access_Token');
+  }
+
+  setAccess_token(access_token){
+    localStorage.setItem('Access_Token', access_token);
+  }
 
   loggedIn(): boolean {
     return this.getIsAuthenticated();
@@ -26,9 +33,10 @@ export class AuthService {
 
   login() {
     this.msalService.loginPopup().subscribe((res: AuthenticationResult) => {
-      this.account = this.msalService.instance.setActiveAccount(res.account);
+      this.msalService.instance.setActiveAccount(res.account);
       console.log("username is", this.msalService.instance.getActiveAccount().username);
       this.router.navigateByUrl('/dashboard');
+      this.setAccess_token(res.accessToken);
     });
     this.setIsAuthenticated(true);
   }
