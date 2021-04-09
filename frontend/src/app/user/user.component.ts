@@ -18,14 +18,14 @@ export class UserComponent implements AfterViewInit, OnInit {
   }
 
   displayedColumns: string[] = ['uniqueId', 'name', 'role', 'email'];
-  dataSource;
+  dataSource: MatTableDataSource<User[]> = new MatTableDataSource([]) ;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
   ngOnInit(): void{
     this.apiService.getAllUsers().subscribe(response => {
-      this.dataSource = response;
+      this.dataSource = new MatTableDataSource(response['data']['users']);
       this.dataSource.sort = this.sort;
     })
   }

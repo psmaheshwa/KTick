@@ -1,28 +1,29 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpErrorResponse, HttpHeaders} from "@angular/common/http";
 import {AuthService} from "./auth.service";
-import {throwError} from "rxjs";
+import {Observable, throwError} from "rxjs";
 import {catchError} from "rxjs/operators";
+import {User} from "../user/user";
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService {
-  access_token: string = this.authService.getAccess_token();
+  access_token: string = this.authService.getAccess_token().trim();
   baseUri: string = 'http://localhost:3000/api/v1/';
-  headers = new Headers({
-    'Content-Type': 'application/json',
-    'Authorization': `Bearer ${this.access_token}`
-  })
 
   constructor(private http: HttpClient, private authService: AuthService) {
   }
 
-  getAllUsers(){
-    let url = `${this.baseUri}/users`;
-    return this.http.get(url,{
-      headers:new HttpHeaders().append('Content-Type','application/json').append('Authorization', `Bearer ${this.access_token}`)
-    }).pipe(catchError(this.errorMgmt));
+  // getAllUsers(){
+  //   let url = `${this.baseUri}users`;
+  //   return this.http.get(url,{
+  //     headers:new HttpHeaders().append('Authorization', `Bearer ${this.access_token}`)
+  //   }).pipe(catchError(this.errorMgmt));
+  // }
+
+  getAllUsers(): Observable<User[]> {
+    return this.http.get<User[]>(this.baseUri+'users');
   }
 
   errorMgmt(error: HttpErrorResponse) {

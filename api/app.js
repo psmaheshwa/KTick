@@ -11,9 +11,7 @@ const projectRouter = require('./routes/projectRoute');
 
 
 const app = express();
-app.use(cors({
-    origin: ['http://localhost:4200']
-}));
+app.use(cors());
 app.use(morgan('dev'));
 app.use(methodOverride());
 app.use(cookieParser());
