@@ -50,9 +50,10 @@
                     <input formControlName="description" matInput placeholder="description*">
                     <mat-error>This field is mandatory</mat-error>
                 </mat-form-field>
-                <button mat-raised-button color="accent" type="submit" [disabled]="createTicketService.form.invalid">Submit</button>
-                <button mat-raised-button color="primary" type="submit" (click)="onClear()">Reset</button>     
-                <button mat-raised-button color="primary" type="submit" (click)="back()">Back</button>  
+               
+               <button id="submit" mat-raised-button color="accent" type="submit" [disabled]="createTicketService.form.invalid">Submit</button>
+               <button id="reset" mat-raised-button color="primary" type="submit" (click)="onClear()">Reset</button>
+                <button id="back" mat-raised-button color="primary" type="submit" (click)="back()">Back</button>  
             </div>
         </mat-grid-tile>
     
