@@ -7,9 +7,14 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatButtonModule} from "@angular/material/button";
 import {ReactiveFormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
+import { LoginModule } from './login/login.module';
+import { DashboardModule } from './dashboard/dashboard.module';
+import {MaterialModule} from "./material/material.module";
+import {UserModule} from "./user/user.module";
+import {TicketsModule} from "./tickets/tickets.module";
+import {CreateTicketService} from "./services/create-ticket.service";
 
-// inbuilt modules
-import { LoginModule } from './modules/login/login.module';
+
 
 @NgModule({
   declarations: [
@@ -22,11 +27,15 @@ import { LoginModule } from './modules/login/login.module';
     MatButtonModule,
     ReactiveFormsModule,
     HttpClientModule,
-
-    // inbuilt modules
-    LoginModule
+    LoginModule,
+    DashboardModule,
+    UserModule,
+    TicketsModule,
+    MaterialModule,
   ],
-  providers: [],
+  providers: [
+    CreateTicketService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

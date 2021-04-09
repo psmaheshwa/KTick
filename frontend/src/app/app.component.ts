@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
-//import { ApiService } from './services/api.service';
-//import {FormGroup} from "@angular/forms";
+import {Component} from '@angular/core';
+import {MsalService} from "@azure/msal-angular";
+import {BehaviorSubject} from "rxjs";
+import {shareReplay} from "rxjs/operators";
+import {AuthService} from "./shared/auth.service";
 
 @Component({
   selector: 'app-root',
@@ -9,4 +11,18 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'KTick';
+  links = [
+    {path: '/dashboard', icon: 'home', title: 'Dashboard'},
+    {path: '/tickets', icon: 'view_list', title: 'Tickets'},
+    {path: '/users', icon: 'person', title: 'Users'},
+  ];
+
+  isAuthenticated$ = this.authService.isAuthenticated$.pipe(shareReplay(1));
+
+  constructor(private authService: AuthService) {
+  }
+
+  logout() {
+    this.authService.logout();
+  }
 }

@@ -1,0 +1,16 @@
+
+ body {
+      background-image: url("../../assets/Backsign.png");
+      background-size: cover;
+      background-position: center center;
+  }
+#sign{
+margin-left: 50%;
+margin-top: 15%;
+}
+.mat-card{
+    height: 80px;
+    width: 120px;
+    margin-top: 10%;
+    
+}
