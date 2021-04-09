@@ -1,10 +1,11 @@
 import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {FormControl} from "@angular/forms";
-import {assigned} from "./ticket";
-import {creeated} from "./ticket";
 import {MatTableDataSource} from "@angular/material/table";
 import {MatPaginator} from "@angular/material/paginator";
 import {MatSort} from "@angular/material/sort";
+import {ApiService} from "../shared/api.service";
+import {User} from "../user/user";
+import {Ticket} from "./ticket";
 
 
 @Component({
@@ -17,7 +18,7 @@ export class TicketsComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor() {
+  constructor(private apiService: ApiService) {
   }
   projects: string[] = [
     'Dev','Prod','Test','Deploy',
@@ -29,18 +30,17 @@ export class TicketsComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this.selectedValue = 'Created';
-    this.displayedColumns = ['title', 'description', 'assignedTo', 'createdOn', 'dueDate', 'priority', 'status'];
-    this.dataSource = new MatTableDataSource(creeated);
+    this.created();
     this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
   }
 
   fontStyleControl = new FormControl();
   displayedColumns = [];
-  dataSource: any;
+  dataSource: MatTableDataSource<Ticket[]> = new MatTableDataSource([]) ;
   selectedValue: String;
   toggleOptions: Array<String> = ["Created", "Assigned"];
   selectedProject: String;
+  UserID: string = '60649114e7d8ea316bab697b';
 
   selectionChanged(item) {
     this.selectedValue = item.value;
@@ -57,19 +57,28 @@ export class TicketsComponent implements OnInit, AfterViewInit {
   onclick() {
     if (this.selectedValue == 'Assigned') {
       this.displayedColumns = ['title', 'description', 'createdBy', 'createdOn', 'dueDate', 'priority', 'status'];
-      this.dataSource = new MatTableDataSource(assigned);
-      this.dataSource.paginator = this.paginator;
+      this.apiService.getAllTickets(`assignedTo=${this.UserID}`).subscribe(response => {
+        this.dataSource = new MatTableDataSource(response['data']['tickets']);
+        this.dataSource.sort = this.sort;
+        this.dataSource.paginator = this.paginator;
+      })
+
       this.dataSource.sort = this.sort;
     } else {
       if (this.selectedValue == 'Created') {
-        this.displayedColumns = ['title', 'description', 'assignedTo', 'createdOn', 'dueDate', 'priority', 'status'];
-        this.dataSource = new MatTableDataSource(creeated);
-        this.dataSource.paginator = this.paginator;
-        this.dataSource.sort = this.sort;
+        this.created();
+
       }
     }
   }
-
+created(){
+  this.displayedColumns = ['title', 'description', 'assignedTo', 'createdOn', 'dueDate', 'priority', 'status'];
+  this.apiService.getAllTickets(`createdBy=${this.UserID}`).subscribe(response => {
+    this.dataSource = new MatTableDataSource(response['data']['tickets']);
+    this.dataSource.sort = this.sort;
+    this.dataSource.paginator = this.paginator;
+  })
+}
   refreshTable() {
   }
 }

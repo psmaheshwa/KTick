@@ -4,6 +4,7 @@ import {AuthService} from "./auth.service";
 import {Observable, throwError} from "rxjs";
 import {catchError} from "rxjs/operators";
 import {User} from "../user/user";
+import {Ticket} from "../tickets/ticket";
 
 @Injectable({
   providedIn: 'root'
@@ -15,15 +16,12 @@ export class ApiService {
   constructor(private http: HttpClient, private authService: AuthService) {
   }
 
-  // getAllUsers(){
-  //   let url = `${this.baseUri}users`;
-  //   return this.http.get(url,{
-  //     headers:new HttpHeaders().append('Authorization', `Bearer ${this.access_token}`)
-  //   }).pipe(catchError(this.errorMgmt));
-  // }
-
   getAllUsers(): Observable<User[]> {
     return this.http.get<User[]>(this.baseUri+'users');
+  }
+
+  getAllTickets(query:String): Observable<Ticket[]> {
+    return this.http.get<Ticket[]>(this.baseUri+'tickets/?'+query);
   }
 
   errorMgmt(error: HttpErrorResponse) {
