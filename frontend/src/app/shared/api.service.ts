@@ -24,6 +24,14 @@ export class ApiService {
     return this.http.get<Ticket[]>(this.baseUri+'tickets/?'+query);
   }
 
+  assigned(): Observable<Ticket[]> {
+    return this.http.get<Ticket[]>(this.baseUri+'tickets/assignedToMe');
+  }
+
+  created(): Observable<Ticket[]> {
+    return this.http.get<Ticket[]>(this.baseUri+'tickets/createdByMe');
+  }
+
   errorMgmt(error: HttpErrorResponse) {
     let errorMessage = '';
     if (error.error instanceof ErrorEvent) {

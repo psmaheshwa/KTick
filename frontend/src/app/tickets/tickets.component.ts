@@ -57,7 +57,7 @@ export class TicketsComponent implements OnInit, AfterViewInit {
   onclick() {
     if (this.selectedValue == 'Assigned') {
       this.displayedColumns = ['title', 'description', 'createdBy', 'createdOn', 'dueDate', 'priority', 'status'];
-      this.apiService.getAllTickets(`assignedTo=${this.UserID}`).subscribe(response => {
+      this.apiService.assigned().subscribe(response => {
         this.dataSource = new MatTableDataSource(response['data']['tickets']);
         this.dataSource.sort = this.sort;
         this.dataSource.paginator = this.paginator;
@@ -73,7 +73,7 @@ export class TicketsComponent implements OnInit, AfterViewInit {
   }
 created(){
   this.displayedColumns = ['title', 'description', 'assignedTo', 'createdOn', 'dueDate', 'priority', 'status'];
-  this.apiService.getAllTickets(`createdBy=${this.UserID}`).subscribe(response => {
+  this.apiService.created().subscribe(response => {
     this.dataSource = new MatTableDataSource(response['data']['tickets']);
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
