@@ -1,31 +1,30 @@
-.example-container {
-    width: 400px;
-    height: 200px;
-    margin: 10px;
-    border: 1px solid #555;
-  }
-.bod li{
-display: inline;
-margin-top: 10px;
-margin-left: 25%;
+#assigned:hover{
+    color: black;
+   
 }
-
-.nav li{
-   
-   
-    font-size: 12;
-    font-family:Georgia, 'Times New Roman', Times, serif
+ul{
+   display: inline;
+   margin-top: 20px;
+}
+li{
+    display: inline;
+    padding-left: 20px;
+    padding-top: 10px;
+}
+#Ttable{
+   margin-top: 2%;
+   margin-left: 25%;
+}
+#filter{
+    margin-left:25%;
+}
+#pgn{
+    margin-top: 2%;
+    margin-left: 25%;
+}
+.tbutton{
+   background-color: cornflowerblue;
+   color: white;
+    font-weight: bold;
     
-}
-.nav{
-    margin-left: 70%;
-}
-#log:hover{
-    color: rgb(136, 20, 121);
-}
-#song:hover{
-    color: rgb(136, 20, 121);
-    }
-#sign:hover{
-        color: rgb(136, 20, 121);
 }

@@ -1,15 +1,62 @@
-import { Component, OnInit } from '@angular/core';
+import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
+import {FormControl} from "@angular/forms";
+import {Ticket} from "./ticket";
+import {assigned} from "./ticket";
+import {creeated} from "./ticket";
+import {MatTableDataSource} from "@angular/material/table";
+import {users} from "../user/user";
+import {MatPaginator} from "@angular/material/paginator";
+import {MatSort} from "@angular/material/sort";
+
 
 @Component({
   selector: 'app-tickets',
   templateUrl: './tickets.component.html',
   styleUrls: ['./tickets.component.css']
 })
-export class TicketsComponent implements OnInit {
+export class TicketsComponent implements OnInit, AfterViewInit {
 
-  constructor() { }
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
 
-  ngOnInit(): void {
+  constructor() {
   }
 
+  ngAfterViewInit() {
+    if (this.selectedValue == 'Assigned') {
+      this.displayedColumns = ['title', 'description', 'createdBy', 'createdOn', 'dueDate', 'priority', 'status'];
+      this.dataSource = new MatTableDataSource(assigned);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+    } else {
+      if (this.selectedValue == 'Created') {
+        this.displayedColumns = ['title', 'description', 'assignedTo', 'createdOn', 'dueDate', 'priority', 'status'];
+        this.dataSource = new MatTableDataSource(creeated);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+      }
+    }
+  }
+
+  ngOnInit() {
+    this.selectedValue = 'Created';
+  }
+
+  fontStyleControl = new FormControl();
+  displayedColumns = [];
+  dataSource: any;
+  selectedValue: String;
+  toggleOptions: Array<String> = ["Created", "Assigned"];
+
+  selectionChanged(item) {
+    this.selectedValue = item.value;
+  }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
+  }
 }
