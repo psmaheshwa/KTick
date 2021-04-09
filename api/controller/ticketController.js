@@ -69,7 +69,7 @@ exports.assignedToMe = (req, res, next) => {
 }
 
 exports.allTickets = catchAsync(async (req, res, next) => {
-    const features = new ApiFeatures(Ticket.find(), req.query)
+    const features = new ApiFeatures(Ticket.find().populate(['createdBy','assignedTo','projectID']), req.query)
         .filter()
         .sort()
         .limitFields()
