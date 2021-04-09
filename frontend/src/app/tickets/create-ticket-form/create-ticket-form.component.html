@@ -1,5 +1,5 @@
 <form [formGroup]="createTicketService.form" class="normal-form ">
-    <mat-grid-list cols="1" rowHeight="400px">
+    <mat-grid-list cols="1" rowHeight="600px">
         <mat-grid-tile>
             <div class="controls-container">
                 <input type="hidden" formControlName="$key">
@@ -16,7 +16,7 @@
                     <mat-error>This field is mandatory</mat-error>
                 </mat-form-field>
                 <mat-form-field>
-                    <mat-select formControlName="status" placeholder="status*">
+                    <mat-select formControlName="status" placeholder="open" [value]="defaultStatus" disabled>
                         <ng-container *ngFor="let status of status">
                             <mat-option value="{{status.id}}">{{status.value}}</mat-option>
                         </ng-container>
@@ -24,7 +24,7 @@
                     <mat-error>This field is mandatory</mat-error>
                 </mat-form-field>
                 <mat-form-field>
-                    <input formControlName="owner" matInput placeholder="owner*">
+                    <input formControlName="assignTo" matInput placeholder="assignTo*">
                     <mat-error>This field is mandatory</mat-error>
                 </mat-form-field>
                 <mat-form-field>
@@ -35,12 +35,18 @@
                     </mat-select>
                     <mat-error>This field is mandatory</mat-error>
                 </mat-form-field>
+                <mat-form-field appearance="fill">
+                    <input matInput fromControlName="dueDate" [matDatepicker]="picker" placeholder="due date">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
                 <mat-form-field>
                     <input formControlName="description" matInput placeholder="description*">
                     <mat-error>This field is mandatory</mat-error>
                 </mat-form-field>
                 <button mat-raised-button color="primary" type="submit" [disabled]="createTicketService.form.invalid">Submit</button>
                 <button mat-raised-button color="primary" type="submit" (click)="onClear()">Reset</button>     
+                <button mat-raised-button color="primary" type="submit" (click)="back()">Back</button>  
             </div>
         </mat-grid-tile>
     </mat-grid-list>
