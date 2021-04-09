@@ -85,6 +85,41 @@ exports.allTickets = catchAsync(async (req, res, next) => {
     });
 });
 
+exports.assigned = catchAsync(async (req, res, next) => {
+    const features = new ApiFeatures(Ticket.find({'assignedTo':req.user.id}).populate(['createdBy','assignedTo','projectID']), req.query)
+        .filter()
+        .sort()
+        .limitFields()
+        .paginate();
+    const tickets = await features.query;
+
+    res.status(200).json({
+        status: 'success',
+        results: tickets.length,
+        data: {
+            tickets
+        }
+    });
+});
+
+exports.created = catchAsync(async (req, res, next) => {
+    const features = new ApiFeatures(Ticket.find({'createdBy':req.user.id}).populate(['createdBy','assignedTo','projectID']), req.query)
+        .filter()
+        .sort()
+        .limitFields()
+        .paginate();
+    const tickets = await features.query;
+
+    res.status(200).json({
+        status: 'success',
+        results: tickets.length,
+        data: {
+            tickets
+        }
+    });
+});
+
+
 exports.createTicket = catchAsync(async (req, res, next) => {
     let newTicket = req.body;
     newTicket.lastEditedOn = Date.now();
