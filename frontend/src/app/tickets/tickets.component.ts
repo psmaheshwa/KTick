@@ -1,10 +1,8 @@
 import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {FormControl} from "@angular/forms";
-import {Ticket} from "./ticket";
 import {assigned} from "./ticket";
 import {creeated} from "./ticket";
 import {MatTableDataSource} from "@angular/material/table";
-import {users} from "../user/user";
 import {MatPaginator} from "@angular/material/paginator";
 import {MatSort} from "@angular/material/sort";
 
@@ -21,8 +19,42 @@ export class TicketsComponent implements OnInit, AfterViewInit {
 
   constructor() {
   }
+  projects: string[] = [
+    'Dev','Prod','Test','Deploy',
+  ];
 
-  ngAfterViewInit() {
+  ngAfterViewInit() {}
+
+
+
+  ngOnInit() {
+    this.selectedValue = 'Created';
+    this.displayedColumns = ['title', 'description', 'assignedTo', 'createdOn', 'dueDate', 'priority', 'status'];
+    this.dataSource = new MatTableDataSource(creeated);
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+  }
+
+  fontStyleControl = new FormControl();
+  displayedColumns = [];
+  dataSource: any;
+  selectedValue: String;
+  toggleOptions: Array<String> = ["Created", "Assigned"];
+  selectedProject: String;
+
+  selectionChanged(item) {
+    this.selectedValue = item.value;
+  }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
+  }
+
+  onclick() {
     if (this.selectedValue == 'Assigned') {
       this.displayedColumns = ['title', 'description', 'createdBy', 'createdOn', 'dueDate', 'priority', 'status'];
       this.dataSource = new MatTableDataSource(assigned);
@@ -38,25 +70,6 @@ export class TicketsComponent implements OnInit, AfterViewInit {
     }
   }
 
-  ngOnInit() {
-    this.selectedValue = 'Created';
-  }
-
-  fontStyleControl = new FormControl();
-  displayedColumns = [];
-  dataSource: any;
-  selectedValue: String;
-  toggleOptions: Array<String> = ["Created", "Assigned"];
-
-  selectionChanged(item) {
-    this.selectedValue = item.value;
-  }
-
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
-    }
+  refreshTable() {
   }
 }

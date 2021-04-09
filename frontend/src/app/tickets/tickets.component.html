@@ -1,14 +1,15 @@
 <div style="width: 100%">
-    <button mat-raised-button color='accent' [matMenuTriggerFor]="menu">Project</button>
-<mat-menu color="accent" #menu="matMenu">
-  <button mat-menu-item>KTick</button>
-  <button mat-menu-item>Sales</button>
-</mat-menu>
-
+  <mat-form-field appearance="fill">
+    <mat-label>Project</mat-label>
+    <mat-select [(ngModel)]="selectedProject" (change)="refreshTable()">
+      <mat-option>All</mat-option>
+      <mat-option *ngFor="let project of projects" [value]="project">{{project}}</mat-option>
+    </mat-select>
+  </mat-form-field>
   <ul class="blist">
     <li id="created">
       <mat-button-toggle-group  appearance="legacy"   [(value)] = "selectedValue" #group="matButtonToggleGroup" multiple=false>
-        <mat-button-toggle class="tbutton" value="bold" *ngFor="let item of toggleOptions;" (change)="selectionChanged($event)" [value]="item">{{item}}</mat-button-toggle>      </mat-button-toggle-group>
+        <mat-button-toggle class="tbutton" value="bold" *ngFor="let item of toggleOptions;" (change)="selectionChanged($event)" (click)="onclick()" [value]="item">{{item}}</mat-button-toggle>      </mat-button-toggle-group>
     </li>
     <li id="add">
       <button mat-mini-fab color="accent" routerLink="/tickets/createTicket">+</button>
@@ -56,6 +57,7 @@
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Status</th>
         <td mat-cell *matCellDef="let element"> {{element.status}} </td>
       </ng-container>
+
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 
