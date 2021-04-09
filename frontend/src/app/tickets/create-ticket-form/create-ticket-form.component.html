@@ -1,9 +1,10 @@
+
 <form [formGroup]="createTicketService.form" class="normal-form ">
     <mat-grid-list cols="1" rowHeight="400px">
         <mat-grid-tile>
             <div class="controls-container">
                 <input type="hidden" formControlName="$key">
-                <mat-form-field>
+                <mat-form-field id="project" >
                     <mat-select formControlName="project" placeholder="Project*">
                         <ng-container *ngFor="let project of projects">
                             <mat-option value="{{project.id}}">{{project.value}}</mat-option>
@@ -11,11 +12,11 @@
                     </mat-select>
                     <mat-error>This field is mandatory</mat-error>
                 </mat-form-field>
-                <mat-form-field>
+                <mat-form-field id="title">
                     <input formControlName="title" matInput placeholder="title*">
                     <mat-error>This field is mandatory</mat-error>
                 </mat-form-field>
-                <mat-form-field>
+                <mat-form-field id="status">
                     <mat-select formControlName="status" placeholder="status*">
                         <ng-container *ngFor="let status of status">
                             <mat-option value="{{status.id}}">{{status.value}}</mat-option>
@@ -23,11 +24,11 @@
                     </mat-select>
                     <mat-error>This field is mandatory</mat-error>
                 </mat-form-field>
-                <mat-form-field>
+                <mat-form-field id="owner">
                     <input formControlName="owner" matInput placeholder="owner*">
                     <mat-error>This field is mandatory</mat-error>
                 </mat-form-field>
-                <mat-form-field>
+                <mat-form-field id="priority">
                     <mat-select formControlName="priority" placeholder="priority*">
                         <ng-container *ngFor="let priority of priority">
                             <mat-option value="{{priority.id}}">{{priority.value}}</mat-option>
@@ -35,11 +36,11 @@
                     </mat-select>
                     <mat-error>This field is mandatory</mat-error>
                 </mat-form-field>
-                <mat-form-field>
-                    <input formControlName="description" matInput placeholder="description*">
+                <mat-form-field id="desc">
+                    <textarea mat-Input formControlName="description" matInput placeholder="description*"></textarea>
                     <mat-error>This field is mandatory</mat-error>
                 </mat-form-field>
-                <button mat-raised-button color="primary" type="submit" [disabled]="createTicketService.form.invalid">Submit</button>
+                <button mat-raised-button color="accent" type="submit" [disabled]="createTicketService.form.invalid">Submit</button>
                 <button mat-raised-button color="primary" type="submit" (click)="onClear()">Reset</button>     
             </div>
         </mat-grid-tile>

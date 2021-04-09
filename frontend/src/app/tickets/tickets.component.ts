@@ -4,10 +4,11 @@ import {Ticket} from "./ticket";
 import {assigned} from "./ticket";
 import {creeated} from "./ticket";
 import {MatTableDataSource} from "@angular/material/table";
-import {users} from "../user/user";
+
 import {MatPaginator} from "@angular/material/paginator";
 import {MatSort} from "@angular/material/sort";
-
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { CreateTicketFormComponent } from './create-ticket-form/create-ticket-form.component';
 
 @Component({
   selector: 'app-tickets',
@@ -19,7 +20,7 @@ export class TicketsComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor() {
+  constructor(private dialog:MatDialog) {
   }
 
   ngAfterViewInit() {
@@ -58,5 +59,13 @@ export class TicketsComponent implements OnInit, AfterViewInit {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
+  }
+  onCreate(){
+    const dialogConfig=new MatDialogConfig();
+    dialogConfig.disableClose=true;
+    dialogConfig.autoFocus=true;
+    dialogConfig.width="60%";
+    this.dialog.open(CreateTicketFormComponent,dialogConfig);
+
   }
 }

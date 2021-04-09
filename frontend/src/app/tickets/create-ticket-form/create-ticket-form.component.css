@@ -1,1 +1,43 @@
+#project{
+    width:20%;
+    box-shadow: turquoise;
+    color: black;
+    font-weight: bold;
+}
+#title{
+    width:40%;
+    box-shadow: turquoise;
+    color: black;
+    font-weight: bold;
+}
+#owner{
+    width:20%;
+    box-shadow: turquoise;
+    color: black;
+    font-weight: bold;
+}
+#status{
+    width:20%;
+    box-shadow: turquoise;
+    color: black;
+    font-weight: bold;
+}
+#priority{
+    width:20%;
+    box-shadow: turquoise;
+    color: black;
+    font-weight: bold;
+}
+#desc{
+    width:60%;
+    box-shadow: turquoise;
+    color: black;
+    font-weight: bold;
+}
 
+.mat-grid-list{
+    height: 400px;
+}
+.mat-form-field{
+    text-decoration-style: none;
+}
