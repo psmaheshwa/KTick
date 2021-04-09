@@ -11,7 +11,7 @@
         <mat-button-toggle class="tbutton" value="bold" *ngFor="let item of toggleOptions;" (change)="selectionChanged($event)" [value]="item">{{item}}</mat-button-toggle>      </mat-button-toggle-group>
     </li>
     <li id="add">
-      <button mat-mini-fab color="accent" routerLink="/tickets/createTicket">+</button>
+      <button mat-mini-fab color="accent"(click)="onCreate()">+</button>
     </li>
   </ul>
   <div style="width:50%">
@@ -21,6 +21,8 @@
     </mat-form-field>
 
     <table id="Ttable" mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+
+
 
       <ng-container matColumnDef="title">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Title</th>
@@ -68,4 +70,3 @@
 
   </div>
 </div>
-
