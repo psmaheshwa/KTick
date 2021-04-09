@@ -3,10 +3,7 @@ import {FormControl} from "@angular/forms";
 import {assigned} from "./ticket";
 import {creeated} from "./ticket";
 import {MatTableDataSource} from "@angular/material/table";
-<<<<<<< HEAD
 
-=======
->>>>>>> 8061bcff1f0e67d0af1ab5ae91f5321840f9be32
 import {MatPaginator} from "@angular/material/paginator";
 import {MatSort} from "@angular/material/sort";
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
@@ -58,15 +55,13 @@ export class TicketsComponent implements OnInit, AfterViewInit {
       this.dataSource.paginator.firstPage();
     }
   }
-<<<<<<< HEAD
   onCreate(){
     const dialogConfig=new MatDialogConfig();
     dialogConfig.disableClose=true;
     dialogConfig.autoFocus=true;
     dialogConfig.width="60%";
-    this.dialog.open(CreateTicketFormComponent,dialogConfig);
+    this.dialog.open(CreateTicketFormComponent,dialogConfig);}
 
-=======
 
   onclick() {
     if (this.selectedValue == 'Assigned') {
@@ -85,6 +80,5 @@ export class TicketsComponent implements OnInit, AfterViewInit {
   }
 
   refreshTable() {
->>>>>>> 8061bcff1f0e67d0af1ab5ae91f5321840f9be32
   }
 }
