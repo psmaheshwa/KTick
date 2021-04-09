@@ -13,8 +13,9 @@ export class CreateTicketService {
     project: new FormControl('',Validators.required),
     title: new FormControl('',Validators.required),
     status: new FormControl('',Validators.required),
-    owner: new FormControl('',Validators.required),
+    assignTo: new FormControl('',Validators.required),
     priority: new FormControl('',Validators.required),
+    dueDate: new FormControl('',Validators.required),
     description: new FormControl('',Validators.required)
   });
 
@@ -24,8 +25,9 @@ export class CreateTicketService {
       project: '',
       title: '',
       status: '',
-      owner: '',
+      assignTo: '',
       priority: '',
+      dueDate: '',
       description: ''
     })
   }

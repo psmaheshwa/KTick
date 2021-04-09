@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CreateTicketService } from '../../services/create-ticket.service';
+import { Location } from '@angular/common';
 
 
 @Component({
@@ -9,7 +10,10 @@ import { CreateTicketService } from '../../services/create-ticket.service';
 })
 export class CreateTicketFormComponent implements OnInit {
 
-  constructor(public createTicketService:CreateTicketService) { }
+  constructor(
+    public createTicketService:CreateTicketService,
+    private _location : Location
+    ) { }
 
   ngOnInit(): void {
   }
@@ -18,6 +22,8 @@ export class CreateTicketFormComponent implements OnInit {
     {id: 0,value: "open"},
     {id: 1,value: "closed"}
   ];
+
+  defaultStatus = "open";
 
   priority = [
     {id:0,value: "low"},
@@ -38,6 +44,10 @@ export class CreateTicketFormComponent implements OnInit {
   onClear(){
     this.createTicketService.form.reset();
     this.createTicketService.initializeFormGroup();
+  }
+
+  back(){
+    this._location.back();
   }
 
   
