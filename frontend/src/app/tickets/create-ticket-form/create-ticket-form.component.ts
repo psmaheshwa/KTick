@@ -25,6 +25,16 @@ export class CreateTicketFormComponent implements OnInit {
     {id:2,value: "high"}
   ];
 
+  projects = [
+    {id:0,value:"Billing"},
+    {id:1,value:"IT"},
+    {id:2,value:"Accounts"},
+    {id:3,value:"Sales"},
+    {id:4,value:"Finance"},
+    {id:5,value:"HR"},
+    {id:6,value:"Marketing"},
+  ]
+
   onClear(){
     this.createTicketService.form.reset();
     this.createTicketService.initializeFormGroup();

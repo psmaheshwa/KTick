@@ -1,8 +1,16 @@
 <form [formGroup]="createTicketService.form" class="normal-form ">
-    <mat-grid-list cols="1" rowHeight="300px">
+    <mat-grid-list cols="1" rowHeight="400px">
         <mat-grid-tile>
             <div class="controls-container">
                 <input type="hidden" formControlName="$key">
+                <mat-form-field>
+                    <mat-select formControlName="project" placeholder="Project*">
+                        <ng-container *ngFor="let project of projects">
+                            <mat-option value="{{project.id}}">{{project.value}}</mat-option>
+                        </ng-container>
+                    </mat-select>
+                    <mat-error>This field is mandatory</mat-error>
+                </mat-form-field>
                 <mat-form-field>
                     <input formControlName="title" matInput placeholder="title*">
                     <mat-error>This field is mandatory</mat-error>
