@@ -5,10 +5,11 @@ import { TicketsRoutingModule } from './tickets-routing.module';
 import { TicketsComponent } from './tickets.component';
 import {MaterialModule} from "../material/material.module";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import { CreateTicketFormComponent } from './create-ticket-form/create-ticket-form.component';
 
 
 @NgModule({
-  declarations: [TicketsComponent],
+  declarations: [TicketsComponent, CreateTicketFormComponent],
   imports: [
     CommonModule,
     TicketsRoutingModule,

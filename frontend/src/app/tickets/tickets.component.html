@@ -11,7 +11,7 @@
         <mat-button-toggle class="tbutton" value="bold" *ngFor="let item of toggleOptions;" (change)="selectionChanged($event)" [value]="item">{{item}}</mat-button-toggle>      </mat-button-toggle-group>
     </li>
     <li id="add">
-      <button mat-mini-fab color="accent">+</button>
+      <button mat-mini-fab color="accent" routerLink="/tickets/createTicket">+</button>
     </li>
   </ul>
   <div style="width:50%">
@@ -68,3 +68,4 @@
 
   </div>
 </div>
+

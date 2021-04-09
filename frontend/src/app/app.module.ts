@@ -12,6 +12,7 @@ import { DashboardModule } from './dashboard/dashboard.module';
 import {MaterialModule} from "./material/material.module";
 import {UserModule} from "./user/user.module";
 import {TicketsModule} from "./tickets/tickets.module";
+import {CreateTicketService} from "./services/create-ticket.service";
 
 
 
@@ -32,7 +33,9 @@ import {TicketsModule} from "./tickets/tickets.module";
     TicketsModule,
     MaterialModule,
   ],
-  providers: [],
+  providers: [
+    CreateTicketService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {
