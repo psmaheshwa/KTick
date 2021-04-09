@@ -1,7 +1,7 @@
 <div style="width: 100%">
   <mat-form-field appearance="fill">
     <mat-label>Project</mat-label>
-    <mat-select [(ngModel)]="selectedProject" (change)="refreshTable()">
+    <mat-select [(ngModel)]="selectedProject" (click)="refreshTable()">
       <mat-option>All</mat-option>
       <mat-option *ngFor="let project of projects" [value]="project">{{project}}</mat-option>
     </mat-select>
