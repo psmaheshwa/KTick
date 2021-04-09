@@ -16,8 +16,7 @@
                     <input formControlName="title" matInput placeholder="title*">
                     <mat-error>This field is mandatory</mat-error>
                 </mat-form-field>
-                <mat-form-field id="status">
-                    <mat-select formControlName="status" placeholder="status*">
+                
                 <mat-form-field>
                     <mat-select formControlName="status" placeholder="open" [value]="defaultStatus" disabled>
                         <ng-container *ngFor="let status of status">
@@ -26,8 +25,7 @@
                     </mat-select>
                     <mat-error>This field is mandatory</mat-error>
                 </mat-form-field>
-                <mat-form-field id="owner">
-                    <input formControlName="owner" matInput placeholder="owner*">
+               
                 <mat-form-field>
                     <input formControlName="assignTo" matInput placeholder="assignTo*">
                     <mat-error>This field is mandatory</mat-error>
@@ -42,6 +40,7 @@
                 </mat-form-field>
                 <mat-form-field id="desc">
                     <textarea mat-Input formControlName="description" matInput placeholder="description*"></textarea>
+                </mat-form-field>
                 <mat-form-field appearance="fill">
                     <input matInput fromControlName="dueDate" [matDatepicker]="picker" placeholder="due date">
                     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
@@ -56,5 +55,6 @@
                 <button mat-raised-button color="primary" type="submit" (click)="back()">Back</button>  
             </div>
         </mat-grid-tile>
+    
     </mat-grid-list>
 </form>
