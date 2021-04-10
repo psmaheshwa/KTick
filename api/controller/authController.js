@@ -4,7 +4,7 @@ const User = require('./../model/user');
 
 exports.ensureAuthenticated = async (req, res, next) => {
     const authHeader = req.headers["authorization"];
-    const token = authHeader && authHeader.split(" ")[2];
+    const token = authHeader && authHeader.split(" ")[1];
     if (token == null) return res.sendStatus(401);
     let profile = jwt_decode(token);
 

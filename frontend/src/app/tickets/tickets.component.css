@@ -1,7 +1,7 @@
-#assigned:hover{
-    color: black;
-   
-}
+/*#assigned:hover{*/
+/*    color: black;*/
+
+/*}*/
 ul{
    display: inline;
    margin-top: 20px;
@@ -22,9 +22,14 @@ li{
     margin-top: 2%;
     margin-left: 25%;
 }
-.tbutton{
-   background-color: cornflowerblue;
-   color: white;
-    font-weight: bold;
-    
+#project{
+    width:1%;
+   
+   
 }
+/*.tbutton{*/
+/*   background-color: cornflowerblue;*/
+/*   color: white;*/
+/*    font-weight: bold;*/
+/*    */
+/*}*/

@@ -17,8 +17,11 @@ router.route('/created').get(ensureAuthenticated, ticketController.createdByMe, 
 router.route('/assigned').get(ensureAuthenticated, ticketController.assignedToMe, ticketController.allTickets);
 
 router
-    .route('/assigned')
-    .get(ensureAuthenticated,ticketController.assignedToMe, ticketController.allTickets);
+    .route('/assignedToMe')
+    .get(ensureAuthenticated,ticketController.assigned);
+router
+    .route('/createdByMe')
+    .get(ensureAuthenticated,ticketController.created);
 
 router
     .route('/')
