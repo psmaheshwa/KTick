@@ -63,7 +63,8 @@ export class TicketsComponent implements OnInit, AfterViewInit {
     dialogConfig.autoFocus=true;
     dialogConfig.width="45%";
     dialogConfig.height="90%";
-    this.dialog.open(CreateTicketFormComponent,dialogConfig);}
+    this.dialog.open(CreateTicketFormComponent,dialogConfig);
+  }
 
 
   onclick() {
