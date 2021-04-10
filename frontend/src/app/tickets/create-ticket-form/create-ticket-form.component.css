@@ -1,16 +1,51 @@
 #project{
     width:20%;
-    box-shadow: turquoise;
+    
     color: black;
     font-weight: bold;
 }
 #title{
-    width:40%;
-    box-shadow: turquoise;
+    width:20%;
+   
     color: black;
     font-weight: bold;
+    margin-left: 8%;
 }
-
+#status{
+    width:40%;
+   
+    color: black;
+    font-weight: bold;
+    margin-left: 8%;
+}
+#At{
+    width:40%;
+   
+    color: black;
+    font-weight: bold;
+    
+}
+#priority{
+    width:20%;
+   
+    color: black;
+    font-weight: bold;
+    margin-left: 8%;
+}
+#desc{
+    width:40%;
+   
+    color: black;
+    font-weight: bold;
+    
+}
+#date{
+    width:40%;
+   
+    color: black;
+    font-weight: bold;
+    margin-left: 8%;
+}
 .mat-grid-list{
     height: 400px;
 }
