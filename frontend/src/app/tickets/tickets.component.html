@@ -12,7 +12,7 @@
         <mat-button-toggle class="tbutton" value="bold" *ngFor="let item of toggleOptions;" (change)="selectionChanged($event)" (click)="onclick()" [value]="item">{{item}}</mat-button-toggle>      </mat-button-toggle-group>
     </li>
     <li id="add">
-      <button mat-mini-fab color="accent"(click)="onCreate()">+</button>
+      <button mat-mini-fab color="accent"(click)="onCreate()"> + </button>
     </li>
   </ul>
   <div style="width:50%">
@@ -30,7 +30,7 @@
         <td mat-cell *matCellDef="let element"> {{element.title}} </td>
       </ng-container>
 
-      <ng-container matColumnDef="description">
+      <ng-container id="description" matColumnDef="description">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Description</th>
         <td mat-cell *matCellDef="let element"> {{element.description}} </td>
       </ng-container>
@@ -60,9 +60,9 @@
         <td mat-cell *matCellDef="let element"> {{element.status}} </td>
       </ng-container>
       <ng-container matColumnDef="actions">
-       <th md-header-cell *matHeaderCellDef mat-sort-header> Actions </th>
-       <td md-cell *matCellDef="let row" >
-             <button md-raised-button >Edit</button> 
+       <th md-header-cell *matHeaderCellDef mat-sort-header>    </th>
+       <td md-cell *matCellDef="let element" >
+             <button md-raised-button color="accent" ><mat-icon mat-font-icon="fa-pencil" class="fa"></mat-icon></button> 
         </td>
     </ng-container> 
 
