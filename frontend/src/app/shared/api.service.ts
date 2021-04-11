@@ -4,26 +4,35 @@ import {AuthService} from "./auth.service";
 import {Observable, throwError} from "rxjs";
 import {catchError} from "rxjs/operators";
 import {User} from "../user/user";
+import {Ticket} from "../tickets/ticket";
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService {
-  access_token: string = this.authService.getAccess_token().trim();
   baseUri: string = 'http://localhost:3000/api/v1/';
 
-  constructor(private http: HttpClient, private authService: AuthService) {
+  constructor(private http: HttpClient) {
   }
 
-  // getAllUsers(){
-  //   let url = `${this.baseUri}users`;
-  //   return this.http.get(url,{
-  //     headers:new HttpHeaders().append('Authorization', `Bearer ${this.access_token}`)
-  //   }).pipe(catchError(this.errorMgmt));
-  // }
-
   getAllUsers(): Observable<User[]> {
-    return this.http.get<User[]>(this.baseUri+'users');
+    return this.http.get<User[]>(this.baseUri + 'users');
+  }
+
+  getAllTickets(query: String): Observable<Ticket[]> {
+    return this.http.get<Ticket[]>(this.baseUri + 'tickets/?' + query);
+  }
+
+  assigned(): Observable<Ticket[]> {
+    return this.http.get<Ticket[]>(this.baseUri + 'tickets/assignedToMe');
+  }
+
+  created(): Observable<Ticket[]> {
+    return this.http.get<Ticket[]>(this.baseUri + 'tickets/createdByMe');
+  }
+
+  loginApi(user: User): Observable<User> {
+    return this.http.post<User>(this.baseUri + 'users', user);
   }
 
   errorMgmt(error: HttpErrorResponse) {

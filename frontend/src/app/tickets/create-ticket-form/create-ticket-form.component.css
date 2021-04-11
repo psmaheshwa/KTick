@@ -1,1 +1,81 @@
-
+#project{
+    width:20%;
+    
+    color: black;
+    font-weight: bold;
+}
+#title{
+    width:20%;
+   
+    color: black;
+    font-weight: bold;
+    margin-left: 8%;
+}
+#status{
+    width:40%;
+   
+    color: black;
+    font-weight: bold;
+    margin-left: 8%;
+}
+#At{
+    width:40%;
+   
+    color: black;
+    font-weight: bold;
+    
+}
+#priority{
+    width:20%;
+   
+    color: black;
+    font-weight: bold;
+    margin-left: 8%;
+}
+#desc{
+    width:40%;
+   
+    color: black;
+    font-weight: bold;
+    
+}
+#date{
+    width:40%;
+   
+    color: black;
+    font-weight: bold;
+    margin-left: 8%;
+}
+.mat-grid-list{
+    height: 400px;
+}
+.mat-form-field{
+    text-decoration-style: none;
+}
+#submit{
+    margin-left: 20px;
+    color: black;
+    font-weight:500;
+}
+#reset{
+    margin-left: 20px;
+    color: whitesmoke;
+    font-weight:500;
+}
+#back{
+    margin-left: 20px;
+    color: whitesmoke;
+    font-weight:500;
+}
+#submit:hover{
+    background-color: rgb(184, 37, 189);
+    color: whitesmoke;
+}
+#reset:hover{
+    background-color: rgb(13, 160, 197);
+    color: black;
+}
+#back:hover{
+    background-color: rgb(13,160,197);
+    color: black;
+}

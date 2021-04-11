@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CreateTicketService } from '../../services/create-ticket.service';
-import { Location } from '@angular/common';
-
+import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-create-ticket-form',
@@ -12,7 +11,7 @@ export class CreateTicketFormComponent implements OnInit {
 
   constructor(
     public createTicketService:CreateTicketService,
-    private _location : Location
+    private dialog : MatDialogRef<CreateTicketFormComponent>
     ) { }
 
   ngOnInit(): void {
@@ -46,8 +45,18 @@ export class CreateTicketFormComponent implements OnInit {
     this.createTicketService.initializeFormGroup();
   }
 
-  back(){
-    this._location.back();
+  onSubmit(){
+    if(this.createTicketService.form.valid){
+      this.createTicketService.form.reset();
+      this.createTicketService.initializeFormGroup();
+      this.onClose();
+    }
+  }
+
+  onClose(){
+    this.createTicketService.form.reset();
+    this.createTicketService.initializeFormGroup();
+    this.dialog.close();
   }
 
   

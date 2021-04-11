@@ -8,10 +8,6 @@ const routes: Routes = [
   {
     path: '',
     component: TicketsComponent,
-  },
-  {
-    path: 'createTicket',
-    component: CreateTicketFormComponent
   }
 ];
 

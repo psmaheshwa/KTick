@@ -13,6 +13,7 @@ import {MaterialModule} from "./material/material.module";
 import {UserModule} from "./user/user.module";
 import {TicketsModule} from "./tickets/tickets.module";
 import {CreateTicketService} from "./services/create-ticket.service";
+import { CreateTicketFormComponent } from './tickets/create-ticket-form/create-ticket-form.component';
 import {ApiInterceptor} from "./shared/api.interceptor";
 
 
@@ -42,7 +43,8 @@ import {ApiInterceptor} from "./shared/api.interceptor";
       multi: true
     }
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents:[CreateTicketFormComponent]
 })
 export class AppModule {
 }
