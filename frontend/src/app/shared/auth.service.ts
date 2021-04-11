@@ -52,7 +52,7 @@ export class AuthService {
       let email = res.account.username;
       let uniqueId = res.uniqueId
       let role = 'user'
-      this.apiService.loginApi({name, email, uniqueId, role}).subscribe();
+      this.apiService.loginApi({id: null, name, email, uniqueId, role}).subscribe();
     });
     this.setIsAuthenticated(true);
   }

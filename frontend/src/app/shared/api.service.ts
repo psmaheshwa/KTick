@@ -5,6 +5,7 @@ import {Observable, throwError} from "rxjs";
 import {catchError} from "rxjs/operators";
 import {User} from "../user/user";
 import {Ticket} from "../tickets/ticket";
+import {Project} from "../project/project";
 
 @Injectable({
   providedIn: 'root'
@@ -33,6 +34,14 @@ export class ApiService {
 
   loginApi(user: User): Observable<User> {
     return this.http.post<User>(this.baseUri + 'users', user);
+  }
+
+  getProjects(): Observable<Project[]> {
+    return this.http.get<Project[]>(this.baseUri + 'projects');
+  }
+
+  createTicket(project: Project): Observable<Project> {
+    return this.http.post<Project>(this.baseUri+'tickets',project);
   }
 
   errorMgmt(error: HttpErrorResponse) {

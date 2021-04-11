@@ -15,12 +15,14 @@ import {TicketsModule} from "./tickets/tickets.module";
 import {CreateTicketService} from "./services/create-ticket.service";
 import { CreateTicketFormComponent } from './tickets/create-ticket-form/create-ticket-form.component';
 import {ApiInterceptor} from "./shared/api.interceptor";
+import { ProjectComponent } from './project/project.component';
 
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ProjectComponent
   ],
   imports: [
     BrowserModule,
