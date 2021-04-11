@@ -64,11 +64,19 @@ export class TicketsComponent implements OnInit, AfterViewInit {
     dialogConfig.height="90%";
     this.dialog.open(CreateTicketFormComponent,dialogConfig);
   }
-
+/*onEdit(row){
+  this.apiService.populateForm(row);
+  const dialogConfig=new MatDialogConfig();
+  dialogConfig.disableClose=true;
+  dialogConfig.autoFocus=true;
+  dialogConfig.width="45%";
+  dialogConfig.height="90%";
+  this.dialog.open(CreateTicketFormComponent,dialogConfig);
+}*/
 
   onclick() {
     if (this.selectedValue == 'Assigned') {
-      this.displayedColumns = ['title', 'description', 'createdBy', 'createdOn', 'dueDate', 'priority', 'status','actions'];
+      this.displayedColumns = ['title', 'description', 'createdBy', 'createdOn', 'dueDate', 'priority', 'status','edit'];
       this.apiService.assigned().subscribe(response => {
         this.dataSource = new MatTableDataSource(response['data']['tickets']);
         this.dataSource.sort = this.sort;
@@ -84,7 +92,7 @@ export class TicketsComponent implements OnInit, AfterViewInit {
     }
   }
 created(){
-  this.displayedColumns = ['title', 'description', 'assignedTo', 'createdOn', 'dueDate', 'priority', 'status','actions'];
+  this.displayedColumns = ['title', 'description', 'assignedTo', 'createdOn', 'dueDate', 'priority', 'status','edit','delete'];
   this.apiService.created().subscribe(response => {
     this.dataSource = new MatTableDataSource(response['data']['tickets']);
     this.dataSource.sort = this.sort;

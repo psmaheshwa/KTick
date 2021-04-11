@@ -17,7 +17,7 @@ export class UserComponent implements AfterViewInit, OnInit {
   constructor(private apiService: ApiService) {
   }
 
-  displayedColumns: string[] = ['uniqueId', 'name', 'role', 'email'];
+  displayedColumns: string[] = ['uniqueId', 'name', 'role', 'email','edit','delete'];
   dataSource: MatTableDataSource<User[]> = new MatTableDataSource([]) ;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;

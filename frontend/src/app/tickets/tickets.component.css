@@ -31,14 +31,8 @@ li{
    
    
 }
-.tbutton{
-   background-color: cornflowerblue;
-   color: white;
-   font-weight: bold;
-}
-.tbutton::selection{
-    color: black;
-}
+
+
 .ng-container{
     width: 120px;
 }
