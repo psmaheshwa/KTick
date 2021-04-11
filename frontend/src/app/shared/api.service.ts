@@ -10,26 +10,29 @@ import {Ticket} from "../tickets/ticket";
   providedIn: 'root'
 })
 export class ApiService {
-  access_token: string = this.authService.getAccess_token().trim();
   baseUri: string = 'http://localhost:3000/api/v1/';
 
-  constructor(private http: HttpClient, private authService: AuthService) {
+  constructor(private http: HttpClient) {
   }
 
   getAllUsers(): Observable<User[]> {
-    return this.http.get<User[]>(this.baseUri+'users');
+    return this.http.get<User[]>(this.baseUri + 'users');
   }
 
-  getAllTickets(query:String): Observable<Ticket[]> {
-    return this.http.get<Ticket[]>(this.baseUri+'tickets/?'+query);
+  getAllTickets(query: String): Observable<Ticket[]> {
+    return this.http.get<Ticket[]>(this.baseUri + 'tickets/?' + query);
   }
 
   assigned(): Observable<Ticket[]> {
-    return this.http.get<Ticket[]>(this.baseUri+'tickets/assignedToMe');
+    return this.http.get<Ticket[]>(this.baseUri + 'tickets/assignedToMe');
   }
 
   created(): Observable<Ticket[]> {
-    return this.http.get<Ticket[]>(this.baseUri+'tickets/createdByMe');
+    return this.http.get<Ticket[]>(this.baseUri + 'tickets/createdByMe');
+  }
+
+  loginApi(user: User): Observable<User> {
+    return this.http.post<User>(this.baseUri + 'users', user);
   }
 
   errorMgmt(error: HttpErrorResponse) {

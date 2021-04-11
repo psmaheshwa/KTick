@@ -31,16 +31,14 @@ const ticketSchema = new mongoose.Schema({
         required: false
     },
     priority: {
-        type: Number,
+        type: String,
         required: true,
-        min: -1,
-        max: 1
+        enum: ['High','Medium','Low']
     },
     status: {
-        type: Number,
-        default: 0,
-        min: 0,
-        max: 1
+        type: String,
+        default: 'Open',
+        enum: ['Open','In Process', 'Close']
     },
     projectID:{
         type: mongoose.Schema.ObjectId,

@@ -13,14 +13,6 @@ exports.ensureAuthenticated = async (req, res, next) => {
         await User.findOne({uniqueId: profile.oid}).then((currentUser) => {
             if (currentUser) {
                 req.user = currentUser;
-            } else {
-                new User({
-                    uniqueId: profile.oid,
-                    name: profile.displayName,
-                    email: profile.upn
-                }).save().then((newUser) => {
-                    req.user = newUser;
-                });
             }
         });
     }
