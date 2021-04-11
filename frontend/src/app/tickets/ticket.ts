@@ -1,5 +1,4 @@
 import {User} from "../user/user";
-import {users} from "../user/user";
 
 export interface Ticket {
   title: string,

@@ -5,7 +5,6 @@ import {MatDialogConfig,MatDialog} from "@angular/material/dialog";
 import {MatPaginator} from "@angular/material/paginator";
 import {MatSort} from "@angular/material/sort";
 import {ApiService} from "../shared/api.service";
-import {User} from "../user/user";
 import {Ticket} from "./ticket";
 import { from } from 'rxjs';
 import { CreateTicketFormComponent } from './create-ticket-form/create-ticket-form.component';

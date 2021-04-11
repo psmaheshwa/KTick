@@ -5,7 +5,7 @@ const userController = require('./../controller/userController');
 
 router
     .route('/').get( ensureAuthenticated,userController.allUsers)
-    .post(ensureAuthenticated,restrictTo('admin'),userController.createUser);
+    .post(userController.createUser);
 
 router
     .route('/:id').get(ensureAuthenticated,userController.getUser)
