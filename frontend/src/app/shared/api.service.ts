@@ -44,6 +44,14 @@ export class ApiService {
     return this.http.post<Project>(this.baseUri+'tickets',project);
   }
 
+  getTicketById(id):Observable<Ticket>{
+    return this.http.get<Ticket>(this.baseUri+'tickets/'+id);
+  }
+
+  deleteTicket(id):Observable<Ticket>{
+    return this.http.delete<Ticket>(this.baseUri+'tickets/'+id);
+  }
+
   errorMgmt(error: HttpErrorResponse) {
     let errorMessage = '';
     if (error.error instanceof ErrorEvent) {

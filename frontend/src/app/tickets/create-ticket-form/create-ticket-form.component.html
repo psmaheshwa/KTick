@@ -5,7 +5,7 @@
         <input type="hidden" formControlName="id">
         <mat-form-field id="project">
           <mat-label>Project</mat-label>
-          <mat-select formControlName="projectId" placeholder="Project*">
+          <mat-select formControlName="projectID" placeholder="Project*">
             <ng-container *ngFor="let project of projects">
               <mat-option value="{{project.id}}">{{project.title}}</mat-option>
             </ng-container>

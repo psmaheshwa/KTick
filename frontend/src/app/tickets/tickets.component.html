@@ -70,11 +70,11 @@
           <ng-container matColumnDef="delete">
             <th md-header-cell *matHeaderCellDef mat-sort-header>   </th>
             <td md-cell *matCellDef="let row" >
-        <button mat-icon-button matTooltip="Click to Delete" class="iconbutton" color="warn">
+        <button mat-icon-button matTooltip="Click to Delete" class="iconbutton" color="warn" (click)="delete(row.id)">
             <mat-icon aria-label="Delete">delete</mat-icon>
           </button>
           </td>
-     </ng-container> 
+     </ng-container>
 
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>

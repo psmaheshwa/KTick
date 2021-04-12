@@ -45,7 +45,7 @@ export class CreateTicketFormComponent implements OnInit {
 
   onSubmit() {
       this.createTicketService.createTicket();
-      /*else 
+      /*else
       update statement*/
       this.dialog.close();
       this.createTicketService.form.reset();
