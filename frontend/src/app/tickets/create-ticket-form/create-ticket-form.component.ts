@@ -54,6 +54,12 @@ export class CreateTicketFormComponent implements OnInit {
       location.reload();
   }
 
+  // call api for update ticket
+  onUpdate(){
+    this.dialog.close();
+    location.reload();
+  }
+
   onClose() {
     this.createTicketService.form.reset();
     this.createTicketService.initializeFormGroup();

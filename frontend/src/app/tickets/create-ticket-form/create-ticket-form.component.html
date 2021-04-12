@@ -1,4 +1,5 @@
-<form [formGroup]="createTicketService.form" class="normal-form ">
+<!-- This form is for create a new ticket -->
+<form [formGroup]="createTicketService.form" class="normal-form" *ngIf=!createTicketService.form.value.projectID>
   <mat-grid-list cols="1" rowHeight="600px">
     <mat-grid-tile>
       <div class="controls-container">
@@ -63,4 +64,71 @@
 
   </mat-grid-list>
 </form>
+
+<!-- This form is form update new ticket-->
+<form *ngIf=createTicketService.form.value.projectID [formGroup]="createTicketService.form" class="normal-form ">
+    <mat-grid-list cols="1" rowHeight="600px">
+      <mat-grid-tile>
+        <div class="controls-container">
+          <input type="hidden" formControlName="id">
+          <mat-form-field id="project">
+            <mat-label>Project</mat-label>
+            <mat-select formControlName="projectID" placeholder="Project*">
+              <ng-container *ngFor="let project of projects">
+                <mat-option value="{{project.id}}">{{project.title}}</mat-option>
+              </ng-container>
+            </mat-select>
+            <mat-error>This field is mandatory</mat-error>
+          </mat-form-field>
+          <mat-form-field id="title">
+            <input formControlName="title" matInput placeholder="Title*">
+            <mat-error>This field is mandatory</mat-error>
+          </mat-form-field>
+  
+          <mat-form-field id="status">
+            <mat-select formControlName="status" placeholder="Open" [value]="defaultStatus" >
+              <ng-container *ngFor="let stat of status">
+                <mat-option value="{{stat}}">{{stat}}</mat-option>
+              </ng-container>
+            </mat-select>
+            <mat-error>This field is mandatory</mat-error>
+          </mat-form-field>
+  
+          <mat-form-field id="At">
+            <mat-label>Assign To:</mat-label>
+            <mat-select formControlName="assignedTo" placeholder="Assign To*">
+              <ng-container *ngFor="let user of users">
+                <mat-option value="{{user.id}}">{{user.email}}</mat-option>
+              </ng-container>
+            </mat-select>
+            <mat-error>This field is mandatory</mat-error>
+          </mat-form-field>
+          <mat-form-field id="priority">
+            <mat-select formControlName="priority" placeholder="Priority*">
+              <ng-container *ngFor="let priority of priorities">
+                <mat-option value="{{priority}}">{{priority}}</mat-option>
+              </ng-container>
+            </mat-select>
+            <mat-error>This field is mandatory</mat-error>
+          </mat-form-field>
+          <mat-form-field id="desc">
+            <textarea matInput formControlName="description" matInput placeholder="Description*"></textarea>
+            <mat-error>This field is mandatory</mat-error>
+          </mat-form-field>
+          <mat-form-field id="date" appearance="fill">
+            <input matInput formControlName="dueDate" [matDatepicker]="picker" placeholder="Due date">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker  #picker></mat-datepicker>
+          </mat-form-field>
+  
+          <button id="submit" mat-raised-button color="accent" type="submit" (click)="onUpdate()"
+                  [disabled]="!createTicketService.form">Update
+          </button>
+          <button id="reset" mat-raised-button color="primary" type="submit" (click)="onClear()">Reset</button>
+          <button id="back" mat-raised-button color="primary" type="submit" (click)="onClose()">Back</button>
+        </div>
+      </mat-grid-tile>
+    </mat-grid-list>
+</form>
+
 {{createTicketService.form.value | json}}
