@@ -57,4 +57,9 @@ export class CreateTicketService {
         description: ticket.description});
     });
   }
+
+  updateTicket(id){
+    this.apiservice.updateTicket(id,this.form.value);
+  }
+
 }
