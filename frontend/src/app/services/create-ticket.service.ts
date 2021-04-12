@@ -13,12 +13,12 @@ export class CreateTicketService {
   form: FormGroup = new FormGroup({
     id: new FormControl(null),
     projectID: new FormControl('', Validators.required),
-    title: new FormControl('', Validators.required),
+    title: new FormControl('', [Validators.required,Validators.minLength(10)]),
     status: new FormControl({value: 'Open', disabled: true}, Validators.required),
     assignedTo: new FormControl('', Validators.required),
     priority: new FormControl('', Validators.required),
     dueDate: new FormControl('', Validators.required),
-    description: new FormControl('', Validators.required),
+    description: new FormControl('',[Validators.required,Validators.minLength(10)]),
   });
 
   initializeFormGroup() {
