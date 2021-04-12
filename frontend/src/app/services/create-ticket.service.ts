@@ -47,10 +47,10 @@ export class CreateTicketService {
     this.apiservice.getTicketById(row).subscribe(response => {
       let ticket = response['data'];
       console.log(ticket)
-      this.form.setValue({id:'',
+      this.form.setValue({id:ticket.id,
         projectID: ticket.projectID['id'],
-        title: ticket.id,
-        status: 'Open',
+        title: ticket.title,
+        status: ticket.status,
         assignedTo: ticket.assignedTo['id'],
         priority: ticket.priority,
         dueDate: ticket.dueDate,
@@ -59,7 +59,8 @@ export class CreateTicketService {
   }
 
   updateTicket(id){
-    this.apiservice.updateTicket(id,this.form.value);
+    console.log(id)
+    this.apiservice.updateTicket(id,this.form.value).subscribe();
   }
 
 }

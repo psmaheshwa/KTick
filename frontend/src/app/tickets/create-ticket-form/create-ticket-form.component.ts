@@ -44,7 +44,11 @@ export class CreateTicketFormComponent implements OnInit {
   }
 
   onSubmit() {
+    if(this.createTicketService.form.value.id){
+      this.createTicketService.updateTicket(this.createTicketService.form.value.id)
+    }else{
       this.createTicketService.createTicket();
+    }
       /*else
       update statement*/
       this.dialog.close();
