@@ -6,6 +6,7 @@ import {Project} from "../../project/project";
 import {User} from "../../user/user";
 
 
+
 @Component({
   selector: 'app-create-ticket-form',
   templateUrl: './create-ticket-form.component.html',
@@ -43,7 +44,6 @@ export class CreateTicketFormComponent implements OnInit {
   }
 
   onSubmit() {
-    if(!this.createTicketService.form.get('$key').value)
       this.createTicketService.createTicket();
       /*else 
       update statement*/
@@ -51,6 +51,7 @@ export class CreateTicketFormComponent implements OnInit {
       this.createTicketService.form.reset();
       this.createTicketService.initializeFormGroup();
       this.onClose();
+      location.reload();
   }
 
   onClose() {
