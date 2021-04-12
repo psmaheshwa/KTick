@@ -59,7 +59,6 @@ export class CreateTicketService {
   }
 
   updateTicket(id){
-    this.populateForm(id);
     this.apiservice.updateTicket(id,this.form.value);
   }
 
