@@ -44,15 +44,14 @@
           <mat-error>This field is mandatory</mat-error>
         </mat-form-field>
         <mat-form-field id="desc">
-          <textarea mat-Input formControlName="description" matInput placeholder="Description*"></textarea>
+          <textarea matInput formControlName="description" matInput placeholder="Description*"></textarea>
           <mat-error>This field is mandatory</mat-error>
         </mat-form-field>
         <mat-form-field id="date" appearance="fill">
-          <input matInput fromControlName="dueDate" [matDatepicker]="picker" placeholder="Due date">
+          <input matInput formControlName="dueDate" [matDatepicker]="picker" placeholder="Due date">
           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-          <mat-datepicker #picker></mat-datepicker>
+          <mat-datepicker  #picker></mat-datepicker>
         </mat-form-field>
-
 
         <button id="submit" mat-raised-button color="accent" type="submit" (click)="onSubmit()"
                 [disabled]="!createTicketService.form">Submit
