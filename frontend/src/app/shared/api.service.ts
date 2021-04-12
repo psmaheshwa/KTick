@@ -52,6 +52,10 @@ export class ApiService {
     return this.http.delete<Ticket>(this.baseUri+'tickets/'+id);
   }
 
+  updateTicket(id, ticket:Ticket):Observable<Ticket>{
+    return this.http.patch<Ticket>(this.baseUri+'tickets/'+id,ticket);
+  }
+
   errorMgmt(error: HttpErrorResponse) {
     let errorMessage = '';
     if (error.error instanceof ErrorEvent) {
