@@ -1,6 +1,7 @@
 import {User} from "../user/user";
 
 export interface Ticket {
+  id:string
   title: string,
   description: string,
   assignedTo: User,

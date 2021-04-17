@@ -121,6 +121,7 @@ exports.created = catchAsync(async (req, res, next) => {
 
 
 exports.createTicket = catchAsync(async (req, res, next) => {
+    console.log(req.body)
     let newTicket = req.body;
     newTicket.lastEditedOn = Date.now();
     newTicket.createdBy = req.user.id;

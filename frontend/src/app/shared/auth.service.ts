@@ -45,6 +45,7 @@ export class AuthService {
       this.msalService.instance.setActiveAccount(res.account);
       console.log("username is", this.msalService.instance.getActiveAccount().username);
       console.log(res)
+      location.reload();
       this.router.navigateByUrl('/dashboard');
       this.setAccess_token(res.idToken);
       this.setUserID(res.uniqueId)
@@ -52,7 +53,8 @@ export class AuthService {
       let email = res.account.username;
       let uniqueId = res.uniqueId
       let role = 'user'
-      this.apiService.loginApi({name, email, uniqueId, role}).subscribe();
+      this.apiService.loginApi({id: null, name, email, uniqueId, role}).subscribe();
+
     });
     this.setIsAuthenticated(true);
   }

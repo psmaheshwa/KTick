@@ -1,14 +1,13 @@
 import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {FormControl} from "@angular/forms";
 import {MatTableDataSource} from "@angular/material/table";
-import {MatDialogConfig,MatDialog} from "@angular/material/dialog";
+import {MatDialogConfig, MatDialog} from "@angular/material/dialog";
 import {MatPaginator} from "@angular/material/paginator";
 import {MatSort} from "@angular/material/sort";
 import {ApiService} from "../shared/api.service";
 import {Ticket} from "./ticket";
-import { from } from 'rxjs';
-import { CreateTicketFormComponent } from './create-ticket-form/create-ticket-form.component';
-
+import {CreateTicketFormComponent} from './create-ticket-form/create-ticket-form.component';
+import {CreateTicketService} from "../services/create-ticket.service";
 
 
 @Component({
@@ -21,14 +20,15 @@ export class TicketsComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private apiService: ApiService,private dialog:MatDialog) {
+  constructor(private apiService: ApiService, private dialog: MatDialog, private service: CreateTicketService) {
   }
+
   projects: string[] = [
-    'Dev','Prod','Test','Deploy',
+    'Dev', 'Prod', 'Test', 'Deploy',
   ];
 
-  ngAfterViewInit() {}
-
+  ngAfterViewInit() {
+  }
 
 
   ngOnInit() {
@@ -39,11 +39,10 @@ export class TicketsComponent implements OnInit, AfterViewInit {
 
   fontStyleControl = new FormControl();
   displayedColumns = [];
-  dataSource: MatTableDataSource<Ticket[]> = new MatTableDataSource([]) ;
+  dataSource: MatTableDataSource<Ticket[]> = new MatTableDataSource([]);
   selectedValue: String;
   toggleOptions: Array<String> = ["Created", "Assigned"];
   selectedProject: String;
-  UserID: string = '60649114e7d8ea316bab697b';
 
   selectionChanged(item) {
     this.selectedValue = item.value;
@@ -56,19 +55,29 @@ export class TicketsComponent implements OnInit, AfterViewInit {
       this.dataSource.paginator.firstPage();
     }
   }
-  onCreate(){
-    const dialogConfig=new MatDialogConfig();
-    dialogConfig.disableClose=true;
-    dialogConfig.autoFocus=true;
-    dialogConfig.width="45%";
-    dialogConfig.height="90%";
-    this.dialog.open(CreateTicketFormComponent,dialogConfig);
+
+  onCreate() {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = "45%";
+    dialogConfig.height = "90%";
+    this.dialog.open(CreateTicketFormComponent, dialogConfig);
   }
 
+  onEdit(row) {
+    this.service.populateForm(row.id);
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = "45%";
+    dialogConfig.height = "90%";
+    this.dialog.open(CreateTicketFormComponent, dialogConfig);
+  }
 
   onclick() {
     if (this.selectedValue == 'Assigned') {
-      this.displayedColumns = ['title', 'description', 'createdBy', 'createdOn', 'dueDate', 'priority', 'status'];
+      this.displayedColumns = ['title', 'description', 'createdBy', 'createdOn', 'dueDate', 'priority', 'status', 'edit'];
       this.apiService.assigned().subscribe(response => {
         this.dataSource = new MatTableDataSource(response['data']['tickets']);
         this.dataSource.sort = this.sort;
@@ -83,14 +92,21 @@ export class TicketsComponent implements OnInit, AfterViewInit {
       }
     }
   }
-created(){
-  this.displayedColumns = ['title', 'description', 'assignedTo', 'createdOn', 'dueDate', 'priority', 'status'];
-  this.apiService.created().subscribe(response => {
-    this.dataSource = new MatTableDataSource(response['data']['tickets']);
-    this.dataSource.sort = this.sort;
-    this.dataSource.paginator = this.paginator;
-  })
-}
+
+  created() {
+    this.displayedColumns = ['title', 'description', 'assignedTo', 'createdOn', 'dueDate', 'priority', 'status', 'edit', 'delete'];
+    this.apiService.created().subscribe(response => {
+      this.dataSource = new MatTableDataSource(response['data']['tickets']);
+      this.dataSource.sort = this.sort;
+      this.dataSource.paginator = this.paginator;
+    })
+  }
+
   refreshTable() {
+  }
+
+  delete(id) {
+    this.service.deleteTicket(id);
+    location.reload();
   }
 }
