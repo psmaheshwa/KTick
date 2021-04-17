@@ -43,5 +43,21 @@ export class UserComponent implements AfterViewInit, OnInit {
     }
   }
 
+/*Edit(row) {
+    //Enter the service to populate
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = "45%";
+    dialogConfig.height = "90%";
+    this.dialog.open(UserTComponent, dialogConfig);
+  }
+  //Create the service for deletion 
+  // deletion permission only for admin 
+ 
+    Ondel(id) {
+    this.service.deleteTicket(id);
+    location.reload();
+  }*/
 
 }
