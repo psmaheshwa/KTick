@@ -1,43 +1,32 @@
-<!--Create the services file and configure the form-->
-<!--Also configure the ts file for the form-->
-<form [formGroup]="UserTableService.form" class="normal-form"> <!-- Create the form group in the services file-->
-    <mat-grid-list cols="1" rowHeight="600px">
-      <mat-grid-tile>
-        <div class="controls-container">
-          <input type="hidden" formControlName="id">
-          <mat-form-field id="name"> <!-- Populate this field using row function , create services in services file-->
-            <input formControlName="name" matInput placeholder="Name*">
-           
-          </mat-form-field>
-  
-         
-          <mat-form-field id="Role">
-            <mat-label>Role</mat-label>
-            <mat-select formControlName="Role" >
-              <ng-container>
-                <mat-option>Admin</mat-option>
-                <mat-option>User</mat-option>
-              </ng-container>
-            </mat-select>
-         
-          </mat-form-field>
-          <mat-form-field id="email">
-            <mat-select formControlName="email">
-              <ng-container>
-                <!--  Add the list of email-->  <mat-option >email</mat-option>
-              </ng-container>
-            </mat-select>
-           
-          </mat-form-field>
-       
-          <button id="submit" mat-raised-button color="accent" type="submit" (click)="onSubmit()"
-                  [disabled]="createTicketService.form.invalid">Submit
-          </button><!--only for update-->
-        </div>
-      </mat-grid-tile>
-  
-    </mat-grid-list>
-  </form>
-  
+<form [formGroup]="userService.form" class="normal-form">
+  <mat-grid-list cols="1" rowHeight="600px">
+    <mat-grid-tile>
+      <div class="controls-container">
+        <input type="hidden" formControlName="id">
+        <input type="hidden" formControlName="uniqueId">
+        <mat-form-field id="name">
+          <input formControlName="name" matInput placeholder="Name*">
+        </mat-form-field>
 
-  
+        <mat-form-field id="email">
+          <input formControlName="email" matInput placeholder="email">
+        </mat-form-field>
+
+        <mat-form-field id="role">
+          <mat-label>Role</mat-label>
+          <mat-select formControlName="role">
+            <ng-container *ngFor="let role of roles">
+              <mat-option value="{{role}}">{{role}}</mat-option>
+            </ng-container>
+          </mat-select>
+        </mat-form-field>
+
+        <button id="submit" mat-raised-button color="accent" type="submit" (click)="onSubmit()">Submit
+        </button>
+      </div>
+    </mat-grid-tile>
+
+  </mat-grid-list>
+</form>
+
+

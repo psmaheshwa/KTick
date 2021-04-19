@@ -67,4 +67,15 @@ export class ApiService {
     return throwError(errorMessage);
   }
 
+  getUserById(id):Observable<User>{
+    return this.http.get<User>(this.baseUri+'users/'+id);
+  }
+
+  updateUser(id, user:User):Observable<User>{
+    return this.http.patch<User>(this.baseUri+'users/'+id,user);
+  }
+
+  deleteUser(id):Observable<User>{
+    return this.http.delete<User>(this.baseUri+'users/'+id);
+  }
 }
