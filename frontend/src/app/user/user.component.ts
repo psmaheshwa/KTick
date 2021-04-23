@@ -4,6 +4,9 @@ import {MatSort} from "@angular/material/sort";
 import {User} from './user';
 import {MatPaginator} from "@angular/material/paginator";
 import {ApiService} from "../shared/api.service";
+import {MatDialog, MatDialogConfig} from "@angular/material/dialog";
+import {UserTComponent} from "./user-t/user-t.component";
+import {UserTableService} from "../services/user-Table.service";
 
 
 @Component({
@@ -14,7 +17,7 @@ import {ApiService} from "../shared/api.service";
 export class UserComponent implements AfterViewInit, OnInit {
   users: User[];
 
-  constructor(private apiService: ApiService) {
+  constructor(private apiService: ApiService, private dialog: MatDialog, private service:UserTableService) {
   }
 
   displayedColumns: string[] = ['uniqueId', 'name', 'role', 'email','edit','delete'];
@@ -43,21 +46,20 @@ export class UserComponent implements AfterViewInit, OnInit {
     }
   }
 
-/*Edit(row) {
-    //Enter the service to populate
+Edit(row) {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     dialogConfig.width = "45%";
     dialogConfig.height = "90%";
     this.dialog.open(UserTComponent, dialogConfig);
+    this.service.populateForm(row.id);
   }
-  //Create the service for deletion 
-  // deletion permission only for admin 
- 
+
+
     Ondel(id) {
-    this.service.deleteTicket(id);
+    this.apiService.deleteUser(id).subscribe();
     location.reload();
-  }*/
+  }
 
 }

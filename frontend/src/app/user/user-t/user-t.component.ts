@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {UserTableService} from "../../services/user-Table.service";
+import {MatDialog} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-user-t',
@@ -7,9 +9,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserTComponent implements OnInit {
 
-  constructor() { }
+  constructor(public userService: UserTableService) {
+  }
+
+  roles = ['admin', 'user'];
 
   ngOnInit(): void {
   }
 
+  onSubmit() {
+    this.userService.update();
+  }
 }

@@ -1,6 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import {BreakpointObserver, Breakpoints} from "@angular/cdk/layout";
 import {map} from "rxjs/operators";
+import {CardService} from '../services/card.service';
+
+export interface Card {
+  title: string;
+  numbers: number;
+}
 
 @Component({
   selector: 'app-dashboard',
@@ -28,9 +34,20 @@ export class DashboardComponent implements OnInit {
       };
     })
   );
-  constructor(private breakpointObserver: BreakpointObserver) {}
+  constructor(private breakpointObserver: BreakpointObserver,private cardService: CardService) {let cards : Card[];}
+
+  cards:{
+    title : string;
+    numbers : number;
+  }[] = [
+    { 
+      title : "",
+      numbers: null
+    }
+  ];
 
   ngOnInit(): void {
+    this.cards = this.cardService.getCard();
   }
 
 
