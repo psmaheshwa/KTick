@@ -1,8 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 
 
-
-
 @Component({
   selector: 'app-card',
   templateUrl: './card.component.html',
@@ -10,22 +8,16 @@ import {Component, Input, OnInit} from '@angular/core';
 })
 export class CardComponent implements OnInit {
 
-
   constructor() {
-  } 
-
+  }
 
   @Input()
-  title : string;
-
+  title: string;
   @Input()
   numbers: number;
 
-
-  
-
   ngOnInit(): void {
-   
+
   }
 
 }

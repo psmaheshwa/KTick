@@ -49,19 +49,10 @@ export class CreateTicketFormComponent implements OnInit {
     }else{
       this.createTicketService.createTicket();
     }
-      /*else
-      update statement*/
       this.dialog.close();
       this.createTicketService.form.reset();
       this.createTicketService.initializeFormGroup();
       this.onClose();
-      location.reload();
-  }
-
-  // call api for update ticket
-  onUpdate(){
-    this.dialog.close();
-    location.reload();
   }
 
   onClose() {
