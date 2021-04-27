@@ -1,0 +1,19 @@
+{
+  "name": "teams-bot",
+  "version": "1.0.0",
+  "description": "Teams bot to integrate with ktick application",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "botbuilder": "^3.13.1",
+    "restify": "^6.3.4"
+  },
+  "devDependencies": {
+    "@types/restify": "^5.0.7"
+  },
+  "author": "Avinash Singh <avinash.20399@gmail.com>",
+  "license": "ISC"
+}
