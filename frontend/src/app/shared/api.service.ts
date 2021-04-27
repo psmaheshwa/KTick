@@ -1,8 +1,6 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpErrorResponse, HttpHeaders} from "@angular/common/http";
-import {AuthService} from "./auth.service";
+import {HttpClient, HttpErrorResponse} from "@angular/common/http";
 import {Observable, throwError} from "rxjs";
-import {catchError} from "rxjs/operators";
 import {User} from "../user/user";
 import {Ticket} from "../tickets/ticket";
 import {Project} from "../project/project";
@@ -78,4 +76,37 @@ export class ApiService {
   deleteUser(id):Observable<User>{
     return this.http.delete<User>(this.baseUri+'users/'+id);
   }
+
+  totalResolved():Observable<number>{
+    return this.http.get<number>(this.baseUri+'tickets/totalClosed');
+  }
+
+  totalOpened():Observable<number>{
+    return this.http.get<number>(this.baseUri+'tickets/totalOpened');
+  }
+
+  totalHigh():Observable<number>{
+    return this.http.get<number>(this.baseUri+'tickets/totalHigh');
+  }
+
+  totalDueExceeded():Observable<number>{
+    return this.http.get<number>(this.baseUri+'tickets/dueExceed');
+  }
+
+  totalToday():Observable<number>{
+    return this.http.get<number>(this.baseUri+'tickets/totalToday');
+  }
+
+  totalMedium():Observable<number>{
+    return this.http.get<number>(this.baseUri+'tickets/totalMedium');
+  }
+
+  totalLow():Observable<number>{
+    return this.http.get<number>(this.baseUri+'tickets/totalLow');
+  }
+
+  totalAssigned():Observable<number>{
+    return  this.http.get<number>(this.baseUri+'tickets/totalLow');
+  }
+
 }
