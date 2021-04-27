@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {FormControl} from "@angular/forms";
 import {MatTableDataSource} from "@angular/material/table";
 import {MatDialogConfig, MatDialog} from "@angular/material/dialog";
@@ -15,7 +15,7 @@ import {CreateTicketService} from "../services/create-ticket.service";
   templateUrl: './tickets.component.html',
   styleUrls: ['./tickets.component.css']
 })
-export class TicketsComponent implements OnInit, AfterViewInit {
+export class TicketsComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -26,10 +26,6 @@ export class TicketsComponent implements OnInit, AfterViewInit {
   projects: string[] = [
     'Dev', 'Prod', 'Test', 'Deploy',
   ];
-
-  ngAfterViewInit() {
-  }
-
 
   ngOnInit() {
     this.selectedValue = 'Created';
@@ -57,22 +53,24 @@ export class TicketsComponent implements OnInit, AfterViewInit {
   }
 
   onCreate() {
-    const dialogConfig = new MatDialogConfig();
-    dialogConfig.disableClose = true;
-    dialogConfig.autoFocus = true;
-    dialogConfig.width = "45%";
-    dialogConfig.height = "90%";
-    this.dialog.open(CreateTicketFormComponent, dialogConfig);
+    this.popupModel();
   }
 
   onEdit(row) {
     this.service.populateForm(row.id);
+    this.popupModel();
+  }
+
+  popupModel() {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     dialogConfig.width = "45%";
     dialogConfig.height = "90%";
     this.dialog.open(CreateTicketFormComponent, dialogConfig);
+    this.dialog.afterAllClosed.subscribe(result => {
+      this.onclick();
+    })
   }
 
   onclick() {
@@ -83,12 +81,10 @@ export class TicketsComponent implements OnInit, AfterViewInit {
         this.dataSource.sort = this.sort;
         this.dataSource.paginator = this.paginator;
       })
-
       this.dataSource.sort = this.sort;
     } else {
       if (this.selectedValue == 'Created') {
         this.created();
-
       }
     }
   }
@@ -102,11 +98,8 @@ export class TicketsComponent implements OnInit, AfterViewInit {
     })
   }
 
-  refreshTable() {
-  }
-
   delete(id) {
     this.service.deleteTicket(id);
-    location.reload();
+    this.onclick();
   }
 }

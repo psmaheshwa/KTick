@@ -30,7 +30,7 @@ export class UserComponent implements AfterViewInit, OnInit {
     this.apiService.getAllUsers().subscribe(response => {
       this.dataSource = new MatTableDataSource(response['data']['users']);
       this.dataSource.sort = this.sort;
-    })
+    });
   }
 
   ngAfterViewInit() {
@@ -54,12 +54,14 @@ Edit(row) {
     dialogConfig.height = "90%";
     this.dialog.open(UserTComponent, dialogConfig);
     this.service.populateForm(row.id);
+    this.dialog.afterAllClosed.subscribe(result =>{
+      this.ngOnInit();
+    })
   }
-
 
     Ondel(id) {
     this.apiService.deleteUser(id).subscribe();
-    location.reload();
+    this.ngOnInit();
   }
 
 }

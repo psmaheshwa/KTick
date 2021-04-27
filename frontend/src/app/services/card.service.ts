@@ -56,7 +56,6 @@ export class CardService {
 
   getCard() {
     this.OnInit()
-    console.log(this.cards);
     return this.cards;
   }
 
