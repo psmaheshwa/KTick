@@ -8,7 +8,8 @@
     "start": "node index.js"
   },
   "dependencies": {
-    "botbuilder": "^3.13.1",
+    "botbuilder-teams": "^0.1.7",
+    "dotenv": "^8.2.0",
     "restify": "^6.3.4"
   },
   "devDependencies": {
