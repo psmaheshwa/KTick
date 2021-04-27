@@ -8,8 +8,16 @@
 const builder =  require('botbuilder');
 const restify = require('restify');
 const githubClient = require('./github-client');
+const builderTeams = require('botbuilder-teams');
+const dotenv = require('dotenv');
+dotenv.config();
 
-const connector = new builder.ChatConnector();
+const connector = new builderTeams.TeamsChatConnector(
+    {
+        appId: process.env.MICROSOFT_TEAMS_BOT_ID,
+        appPassword: process.env.MICROSOFT_TEAMS_BOT_PASSWORD
+    }
+);
 
 const bot = new builder.UniversalBot(connector).set('storage',new builder.MemoryBotStorage());
 
@@ -66,7 +74,7 @@ dialog.matches(/^search/i,[
             card.tap(new builder.CardAction.openUrl(session,profile.html_url));
 
             var message = new builder.Message(session).attachments([card]);
-            session.send(message);
+            session.send( message);
         })
     }
 ])
