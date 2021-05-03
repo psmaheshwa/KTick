@@ -34,7 +34,7 @@
     <router-outlet></router-outlet>
   </div>
 
-  <div [disabled]="!(isAuthenticated$ | async)">
+  <div *ngIf="isAuthenticated$ | async">
     <df-messenger
     intent="WELCOME"
     chat-title="Ktick-bot"
