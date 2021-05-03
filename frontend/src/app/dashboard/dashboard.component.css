@@ -1,4 +1,28 @@
  
+.line{
+  align-content: flex-end;
+  box-shadow: 60px;
+  padding-top: 10px;
+ 
+}
+#ch{
+  display: block;
+  width: 500px;
+  
+  
+}
+.lch
+{
+
+margin-left: 10px;
+}
+.dch{
+  margin-right: 40px;
+}
+.lchart{
+  width: 600px;
+  
+}
 
 .dashboard-card {
   position: absolute;
@@ -21,4 +45,26 @@
 
 .mat-grid-list{
   margin-left: 2%;
+}
+.mat-grid-tile{
+  align-content: flex-end;
+}
+.mat-card{
+  align-content: flex-end;
+}
+#dnut{
+  align-content:center;
+  align-items: flex-end;
+  
+  width: 250px;
+}
+.cards{
+  max-width: 900px;
+  border-radius: 20px;
+  
+}
+.dnutcard{
+  width: 250px;
+  align-content: center;
+  border-radius: 20px;
 }

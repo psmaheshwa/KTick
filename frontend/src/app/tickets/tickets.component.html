@@ -1,6 +1,6 @@
 <div style="width: 100%">
-  <mat-form-field appearance="fill">
-    <button mat-raised-button color="accent">Project</button>
+  <mat-form-field id="project">
+    <button mat-raised-button id="btns">Project</button>
     <mat-select id="project" [(ngModel)]="selectedProject" (click)="onclick()">
       <mat-option>All</mat-option>
       <mat-option *ngFor="let project of projects" [value]="project">{{project}}</mat-option>
@@ -11,8 +11,8 @@
       <mat-button-toggle-group  appearance="legacy"   [(value)] = "selectedValue" #group="matButtonToggleGroup" multiple=false>
         <mat-button-toggle class="tbutton" value="bold" *ngFor="let item of toggleOptions;" (change)="selectionChanged($event)" (click)="onclick()" [value]="item">{{item}}</mat-button-toggle>      </mat-button-toggle-group>
     </li>
-    <li id="add">
-      <button mat-mini-fab color="accent"(click)="onCreate()"> + </button>
+    <li >
+      <button id="add" mat-mini-fab color="primary"(click)="onCreate()"> + </button>
     </li>
   </ul>
   <div style="width:50%">
@@ -22,9 +22,6 @@
     </mat-form-field>
 
     <table id="Ttable" mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
-
-
-
       <ng-container matColumnDef="title">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Title</th>
         <td mat-cell *matCellDef="let element"> {{element.title}} </td>
