@@ -33,7 +33,18 @@
   <div class="container">
     <router-outlet></router-outlet>
   </div>
+
+  <div [disabled]="!(isAuthenticated$ | async)">
+    <df-messenger
+    intent="WELCOME"
+    chat-title="Ktick-bot"
+    agent-id="6c1cef1e-48e8-4da2-b208-355736a53367"
+    language-code="en"
+  ></df-messenger>
+  </div>
+
 </mat-sidenav-container>
+
 
 
 
