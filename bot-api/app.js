@@ -12,6 +12,9 @@ app.use(express.urlencoded({ extended: false }));
 // Primary Router
 app.use('/api/dialogflow',require('./server/routers/dialogflow'));
 
+// Router for fullfillment
+app.use('/api/webhook',require('./server/routers/fulfillment'));
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
