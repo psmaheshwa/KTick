@@ -6,5 +6,6 @@
 /bot-api/node_modules
 /bot-api/config.js
 /teams-bot/node_modules
+/teams-bot/.env
 
 

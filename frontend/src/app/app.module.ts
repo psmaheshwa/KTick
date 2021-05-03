@@ -1,4 +1,4 @@
-import {NgModule} from '@angular/core';
+import {NgModule, NO_ERRORS_SCHEMA} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 
 import {AppRoutingModule} from './app-routing.module';
@@ -37,6 +37,7 @@ import { ProjectComponent } from './project/project.component';
     TicketsModule,
     MaterialModule,
   ],
+  schemas: [ NO_ERRORS_SCHEMA ],
   providers: [
     CreateTicketService,
     {
