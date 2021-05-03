@@ -47,10 +47,8 @@ export class UserTableService {
   }
 
   update() {
-    console.log(this.form.value.id)
     if(this.form.value.id)
       this.updateUser(this.form.value.id);
     this.dialog.closeAll();
-    location.reload();
   }
 }
