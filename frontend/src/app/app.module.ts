@@ -36,6 +36,7 @@ import { ProjectComponent } from './project/project.component';
     UserModule,
     TicketsModule,
     MaterialModule,
+    
   ],
   schemas: [ NO_ERRORS_SCHEMA ],
   providers: [
