@@ -4,6 +4,7 @@ import {AuthenticationResult} from '@azure/msal-common';
 import {Router} from "@angular/router";
 import {BehaviorSubject} from "rxjs";
 import {ApiService} from "./api.service";
+import {shareReplay} from "rxjs/operators";
 
 const AUTHENTICATION_KEY = 'workshop:authenticated';
 
@@ -15,11 +16,18 @@ const AUTHENTICATION_KEY = 'workshop:authenticated';
 export class AuthService {
   private isAuthenticated = new BehaviorSubject(AuthService.getIsAuthenticated() || false);
   isAuthenticated$ = this.isAuthenticated.asObservable();
-  isAdmin:boolean;
 
   constructor(private msalService: MsalService, private router: Router, private apiService: ApiService) {
   }
 
+
+  getIsAdmin(): string {
+    return localStorage.getItem('isAdmin');
+  }
+
+  setIsAdmin(isAdmin: string): void {
+    localStorage.setItem('isAdmin', isAdmin);
+  }
 
   getUserID(): string {
     return localStorage.getItem('User-ID');
@@ -44,18 +52,18 @@ export class AuthService {
   login() {
     this.msalService.loginPopup().subscribe((res: AuthenticationResult) => {
       this.msalService.instance.setActiveAccount(res.account);
-      console.log("username is", this.msalService.instance.getActiveAccount().username);
-      console.log(res)
       AuthService.setIsAuthenticated(true);
       this.setAccess_token(res.idToken);
       this.setUserID(res.uniqueId)
-      this.router.navigateByUrl('/dashboard').then(r => {});
+      this.router.navigateByUrl('/dashboard').then(r => {
+        this.isAuthenticated.next(true);
+      });
       let name = res.account.name;
       let email = res.account.username;
       let uniqueId = res.uniqueId
       let role = 'user'
-      this.apiService.loginApi({id: null, name, email, uniqueId, role}).subscribe(res =>{
-        this.isAdmin = res['data']['user'].role == 'admin';
+      this.apiService.loginApi({id: null, name, email, uniqueId, role}).subscribe(res => {
+        this.setIsAdmin(res['data']['user'].role);
       });
     });
   }
@@ -65,6 +73,7 @@ export class AuthService {
     AuthService.setIsAuthenticated(false);
     this.isAuthenticated.next(false);
   }
+
 
   private static getIsAuthenticated(): boolean {
     return JSON.parse(localStorage.getItem(AUTHENTICATION_KEY));

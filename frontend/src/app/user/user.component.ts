@@ -17,10 +17,8 @@ import {AuthService} from "../shared/auth.service";
 })
 export class UserComponent implements AfterViewInit, OnInit {
   users: User[];
-  isAdmin: boolean
 
   constructor(private auth: AuthService, private apiService: ApiService, private dialog: MatDialog, private service: UserTableService) {
-    this.isAdmin = auth.isAdmin;
   }
 
   displayedColumns: string[] = ['uniqueId', 'name', 'role', 'email', 'edit', 'delete'];
@@ -30,18 +28,19 @@ export class UserComponent implements AfterViewInit, OnInit {
   @ViewChild(MatSort) sort: MatSort;
 
   ngOnInit(): void {
+    if(this.auth.getIsAdmin() == 'admin'){
+      this.displayedColumns = ['uniqueId', 'name', 'role', 'email', 'edit', 'delete'];
+    }else{
+      this.displayedColumns = ['uniqueId', 'name', 'role', 'email'];
+    }
     this.apiService.getAllUsers().subscribe(response => {
-      if(this.isAdmin){
-        this.displayedColumns = ['uniqueId', 'name', 'role', 'email', 'edit', 'delete'];
-      }else{
-        this.displayedColumns = ['uniqueId', 'name', 'role', 'email'];
-      }
       this.dataSource = new MatTableDataSource(response['data']['users']);
       this.dataSource.sort = this.sort;
     });
   }
 
   ngAfterViewInit() {
+
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }
