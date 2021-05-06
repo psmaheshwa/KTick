@@ -82,3 +82,7 @@
     background-color: rgb(13,160,197);
     color: black;
 }
+#placeholder{
+font-family: 'Courier New', Courier, monospace;
+font-style: italic;
+}

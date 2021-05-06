@@ -5,7 +5,7 @@
      <input type="hidden" formControlName="id">
         <mat-form-field id="project">
           <mat-label>Project</mat-label>
-          <mat-select formControlName="projectID" placeholder="Project*">
+          <mat-select formControlName="projectID" placeholder="Project*" id="placeholder">
             <ng-container *ngFor="let project of projects">
               <mat-option value="{{project.id}}">{{project.title}}</mat-option>
             </ng-container>
@@ -15,14 +15,14 @@
     </mat-grid-tile>
     <mat-grid-tile colspan="2">
         <mat-form-field id="title">
-          <input formControlName="title" matInput placeholder="Title*">
+          <input formControlName="title" matInput placeholder="Title*" id="placeholder">
           <mat-error *ngIf="createTicketService.form.controls['title'].errors?.required">This field is mandatory</mat-error>
           <mat-error *ngIf="createTicketService.form.controls['title'].errors?.minlength">Title can't be less than 10 character</mat-error>
         </mat-form-field>
       </mat-grid-tile>
       <mat-grid-tile colspan="1">
          <mat-form-field id="status">
-          <mat-select formControlName="status" placeholder="Open" [value]="defaultStatus" >
+          <mat-select formControlName="status" placeholder="Open" [value]="defaultStatus" id="placeholder">
             <ng-container *ngFor="let stat of status">
               <mat-option value="{{stat}}">{{stat}}</mat-option>
             </ng-container>
@@ -32,7 +32,7 @@
       </mat-grid-tile>
       <mat-grid-tile colspan="2">
         <mat-form-field id="desc">
-          <textarea matInput formControlName="description" matInput placeholder="Description*"></textarea>
+          <textarea matInput formControlName="description" matInput placeholder="Description*" id="placeholder"></textarea>
           <mat-error *ngIf="createTicketService.form.controls['description'].errors?.required">This field is mandatory</mat-error>
           <mat-error *ngIf="createTicketService.form.controls['description'].errors?.minlength">Description can't be less than 10 character</mat-error>
         </mat-form-field>
@@ -40,7 +40,7 @@
       <mat-grid-tile colspan="1">
         <mat-form-field id="At">
           <mat-label>Assign To:</mat-label>
-          <mat-select formControlName="assignedTo" placeholder="Assign To*">
+          <mat-select formControlName="assignedTo" placeholder="Assign To*" id="placeholder">
             <ng-container *ngFor="let user of users">
               <mat-option value="{{user.id}}">{{user.email}}</mat-option>
             </ng-container>
@@ -50,14 +50,14 @@
       </mat-grid-tile>
       <mat-grid-tile colspan="2">
         <mat-form-field id="date" appearance="fill">
-          <input matInput formControlName="dueDate" [matDatepicker]="picker" placeholder="Due date">
+          <input matInput formControlName="dueDate" [matDatepicker]="picker" placeholder="Due date" id="placeholder">
           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker  #picker></mat-datepicker>
         </mat-form-field>
       </mat-grid-tile>
       <mat-grid-tile colspan="1">
         <mat-form-field id="priority">
-          <mat-select formControlName="priority" placeholder="Priority*">
+          <mat-select formControlName="priority" placeholder="Priority*" id="placeholder">
             <ng-container *ngFor="let priority of priorities">
               <mat-option value="{{priority}}">{{priority}}</mat-option>
             </ng-container>
