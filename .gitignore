@@ -4,5 +4,8 @@
 /api/utils/config.js
 /frontend/node_modules
 /bot-api/node_modules
+/bot-api/config.js
+/teams-bot/node_modules
+/teams-bot/.env
 
 

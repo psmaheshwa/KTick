@@ -17,6 +17,7 @@ export class CardComponent implements OnInit {
   numbers: number;
 
   ngOnInit(): void {
+    
 
   }
 

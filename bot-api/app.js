@@ -1,29 +1,19 @@
 //Prebuilt modules
-var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
-
-// user built modules
-const indexRouter = require('./server/routers/indexRouter');
-const corsMiddleware = require('./server/middlewares/corsMiddleware');
 
 // Initiating app
 var app = express();
 
 // Middlewares
-app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
-
-// cors  middleware
-app.use(corsMiddleware.corsFuction);
 
 // Primary Router
-app.use('/chatbot', indexRouter);
+app.use('/api/dialogflow',require('./server/routers/dialogflow'));
+
+// Router for fullfillment
+app.use('/api/webhook',require('./server/routers/fulfillment'));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -42,3 +32,8 @@ app.use(function(err, req, res, next) {
 });
 
 module.exports = app;
+
+
+/*
+set GOOGLE_APPLICATION_CREDENTIALS=D:\KTERN-Bot\Bot\KTick\bot-api\ai-avinash-fydk-4f42d3b1acf7.json
+*/
