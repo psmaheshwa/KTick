@@ -1,46 +1,49 @@
 #project{
-    width:20%;
+    width:100%;
     
     color: black;
     font-weight: bold;
 }
 #title{
-    width:20%;
+    width:100%;
    
     color: black;
     font-weight: bold;
     margin-left: 8%;
 }
 #status{
-    width:40%;
+    width:80%;
+   padding-right: 20px;
+   margin-right: 70px;
    
     color: black;
     font-weight: bold;
     margin-left: 8%;
 }
 #At{
-    width:40%;
+    width:100%;
    
     color: black;
     font-weight: bold;
     
 }
 #priority{
-    width:20%;
-   
+    width:100%;
+    margin-right: 70px;
     color: black;
     font-weight: bold;
-    margin-left: 8%;
+    
 }
 #desc{
-    width:40%;
-   
+    width:85%;
+  margin-left: 10px;
+  padding-left: 10px;
     color: black;
     font-weight: bold;
     
 }
 #date{
-    width:40%;
+    width:100%;
    
     color: black;
     font-weight: bold;
