@@ -15,6 +15,7 @@ router.route('/totalToday').get(ensureAuthenticated, ticketController.todayTicke
 router.route('/dueExceed').get(ensureAuthenticated, ticketController.dueExceeded);
 router.route('/created').get(ensureAuthenticated, ticketController.createdByMe, ticketController.allTickets);
 router.route('/assigned').get(ensureAuthenticated, ticketController.assignedToMe, ticketController.allTickets);
+router.route('/weekChart').get(ensureAuthenticated,ticketController.weeklyData);
 router.route('/totalAssigned').get(ensureAuthenticated,ticketController.totalAssigned);
 router
     .route('/assignedToMe')

@@ -22,11 +22,11 @@
 #btns:hover{
     color: black;
 }
-#menu:hover
+.menu:hover
 {
 color: black;
 }
-#menu{
+.menu{
     background-color:  #1F3F49;
 }
 .screen{

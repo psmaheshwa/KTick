@@ -1,6 +1,4 @@
 import {Component} from '@angular/core';
-import {MsalService} from "@azure/msal-angular";
-import {BehaviorSubject} from "rxjs";
 import {shareReplay} from "rxjs/operators";
 import {AuthService} from "./shared/auth.service";
 
