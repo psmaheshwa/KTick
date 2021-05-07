@@ -4,6 +4,7 @@ import {AuthenticationResult} from '@azure/msal-common';
 import {Router} from "@angular/router";
 import {BehaviorSubject} from "rxjs";
 import {ApiService} from "./api.service";
+import {shareReplay} from "rxjs/operators";
 
 const AUTHENTICATION_KEY = 'workshop:authenticated';
 
@@ -13,12 +14,20 @@ const AUTHENTICATION_KEY = 'workshop:authenticated';
 
 
 export class AuthService {
-  private isAuthenticated = new BehaviorSubject(this.getIsAuthenticated() || false);
+  private isAuthenticated = new BehaviorSubject(AuthService.getIsAuthenticated() || false);
   isAuthenticated$ = this.isAuthenticated.asObservable();
 
   constructor(private msalService: MsalService, private router: Router, private apiService: ApiService) {
   }
 
+
+  getIsAdmin(): string {
+    return localStorage.getItem('isAdmin');
+  }
+
+  setIsAdmin(isAdmin: string): void {
+    localStorage.setItem('isAdmin', isAdmin);
+  }
 
   getUserID(): string {
     return localStorage.getItem('User-ID');
@@ -37,39 +46,40 @@ export class AuthService {
   }
 
   loggedIn(): boolean {
-    return this.getIsAuthenticated();
+    return AuthService.getIsAuthenticated();
   }
 
   login() {
     this.msalService.loginPopup().subscribe((res: AuthenticationResult) => {
       this.msalService.instance.setActiveAccount(res.account);
-      console.log("username is", this.msalService.instance.getActiveAccount().username);
-      console.log(res)
-      location.reload();
-      this.router.navigateByUrl('/dashboard');
+      AuthService.setIsAuthenticated(true);
       this.setAccess_token(res.idToken);
       this.setUserID(res.uniqueId)
+      this.router.navigateByUrl('/dashboard').then(r => {
+        this.isAuthenticated.next(true);
+      });
       let name = res.account.name;
       let email = res.account.username;
       let uniqueId = res.uniqueId
       let role = 'user'
-      this.apiService.loginApi({id: null, name, email, uniqueId, role}).subscribe();
-
+      this.apiService.loginApi({id: null, name, email, uniqueId, role}).subscribe(res => {
+        this.setIsAdmin(res['data']['user'].role);
+      });
     });
-    this.setIsAuthenticated(true);
   }
 
   logout() {
     this.msalService.logout();
-    this.setIsAuthenticated(false);
+    AuthService.setIsAuthenticated(false);
     this.isAuthenticated.next(false);
   }
 
-  private getIsAuthenticated(): boolean {
+
+  private static getIsAuthenticated(): boolean {
     return JSON.parse(localStorage.getItem(AUTHENTICATION_KEY));
   }
 
-  private setIsAuthenticated(isAuthenticated: boolean) {
+  private static setIsAuthenticated(isAuthenticated: boolean) {
     localStorage.setItem(AUTHENTICATION_KEY, JSON.stringify(isAuthenticated));
   }
 }
