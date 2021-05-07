@@ -4,11 +4,24 @@ table {
 #Utable{
   margin-top: 2%;
   margin-left: 35%;
+  border-radius: 10px;
+  background-color:  #A5D8DD;
 }
 #filter{
    margin-left:35%;
+   font-family: 'Courier New', Courier, monospace;
+   font-style: italic;
 }
 #pgn{
    margin-top: 2%;
    margin-left: 35%;
+   background-color:  #A5D8DD;
+   border-radius: 5px;
+   box-shadow:50px;
+}
+.w-100{
+  width: 100px;
+}
+.td{
+  width: 70px;
 }

@@ -1,6 +1,7 @@
+
 <mat-card class="dashboard-card">
   <mat-card-header>
-    <mat-card-title>
+    <mat-card-title id="t">
       {{title}}
       <button mat-icon-button class="more-button" [matMenuTriggerFor]="menu" aria-label="Toggle menu">
         <mat-icon>more_vert</mat-icon>
@@ -12,6 +13,8 @@
     </mat-card-title>
   </mat-card-header>
   <mat-card-content class="dashboard-card-content">
+    {{numbers}}
+    
     <ng-content></ng-content>
   </mat-card-content>
 </mat-card>

@@ -11,31 +11,31 @@ exports.aliasFilter = (req, res, next) => {
 }
 
 exports.totalOpened = catchAsync(async (req, res, next) => {
-    req.query = {'status': 0, 'assignedTo': req.user.id};
+    req.query = {'status': 'Open', 'assignedTo': req.user.id};
     const count = await Ticket.countDocuments(req.query);
     res.status(200).json({count})
 });
 
 exports.totalClosed = catchAsync(async (req, res, next) => {
-    req.query = {'status': 1, 'assignedTo': req.user.id};
+    req.query = {'status': 'Close', 'assignedTo': req.user.id};
     const count = await Ticket.countDocuments(req.query);
     res.status(200).json({count})
 });
 
 exports.totalHigh = catchAsync(async (req, res, next) => {
-    req.query = {'priority': 1, 'assignedTo': req.user.id};
+    req.query = {'priority': 'High', 'assignedTo': req.user.id};
     const count = await Ticket.countDocuments(req.query);
     res.status(200).json({count})
 });
 
 exports.totalMedium = catchAsync(async (req, res, next) => {
-    req.query = {'priority': 0, 'assignedTo': req.user.id};
+    req.query = {'priority': 'Medium', 'assignedTo': req.user.id};
     const count = await Ticket.countDocuments(req.query);
     res.status(200).json({count})
 });
 
 exports.totalLow = catchAsync(async (req, res, next) => {
-    req.query = {'priority': -1, 'assignedTo': req.user.id};
+    req.query = {'priority': 'Low', 'assignedTo': req.user.id};
     const count = await Ticket.countDocuments(req.query);
     res.status(200).json({count});
 });
@@ -45,7 +45,7 @@ exports.todayTickets = catchAsync(async (req, res, next) => {
     start.setHours(0,0,0,0);
     const end = new Date();
     end.setHours(23,59,59,999);
-    const count = await Ticket.countDocuments({'dueDate':{$gte: start,$lt: end}, 'status':0});
+    const count = await Ticket.countDocuments({'dueDate':{$gte: start,$lt: end}, 'status':'Open','assignedTo': req.user.id});
     res.status(200).json({count})
 });
 
@@ -54,9 +54,15 @@ exports.dueExceeded = catchAsync(async (req, res, next) => {
     start.setHours(0,0,0,0);
     const end = new Date();
     end.setHours(23,59,59,999);
-    const count = await Ticket.countDocuments({'dueDate':{$lte: start}, 'status':0});
+    const count = await Ticket.countDocuments({'dueDate':{$lte: start}, 'status':'Open', 'assignedTo': req.user.id});
     res.status(200).json({count})
 });
+
+
+exports.totalAssigned = catchAsync(async (req,res,next) =>{
+    const count = await Ticket.countDocuments({'assignedTo': req.user.id});
+    res.status(200).json({count})
+})
 
 exports.createdByMe = (req, res, next) => {
     req.query = {'createdBy': req.user.id}
@@ -121,6 +127,7 @@ exports.created = catchAsync(async (req, res, next) => {
 
 
 exports.createTicket = catchAsync(async (req, res, next) => {
+    console.log(req.body)
     let newTicket = req.body;
     newTicket.lastEditedOn = Date.now();
     newTicket.createdBy = req.user.id;

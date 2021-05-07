@@ -1,16 +1,32 @@
 <div class="grid-container">
-
-  <mat-grid-list cols="{{ ( cardLayout | async )?.columns }}" rowHeight="200px">
-    <!--Mini Cards-->
-    <mat-grid-tile *ngFor="let i of [1, 2, 3, 4]" [colspan]="( cardLayout | async )?.miniCard.cols"
+  <mat-grid-list cols="{{ ( cardLayout | async )?.columns }}" rowHeight="160px">
+    
+    <mat-grid-tile *ngFor="let card of cards" [colspan]="( cardLayout | async )?.miniCard.cols"
                    [rowspan]="( cardLayout | async )?.miniCard.rows">
-      <app-card title="Card {{i}}"><div>Mini Card Content Here</div></app-card>
+      <app-card title={{card.title}} numbers={{card.numbers}}></app-card>
     </mat-grid-tile>
-    <!--Charts-->
-    <mat-grid-tile *ngFor="let i of [5, 6]" [colspan]="( cardLayout | async )?.chart.cols"
-                   [rowspan]="( cardLayout | async )?.chart.rows">
-      <app-card title="Card {{i}}"><div>Chart Content Here</div></app-card>
-    </mat-grid-tile>
-
+   
   </mat-grid-list>
+  <mat-grid-list cols="{{ ( cardLayout | async )?.columns }}" rowHeight="160px">
+    <mat-grid-tile [colspan]="( cardLayout | async )?.chart.cols"
+                   [rowspan]="( cardLayout | async )?.chart.rows" class="lch">
+      <mat-card class="cards">
+        <mat-card-content class="line">
+          <div id="ch">
+              <canvas id="myChart"></canvas>
+        </div>
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile >
+    <mat-grid-tile [colspan]="( cardLayout | async )?.chart.cols"
+                    [rowspan]="( cardLayout | async )?.chart.rows" class="dch">
+      <mat-card class="dnutcard">
+        <mat-card-content>
+              <div id="dnut">
+                  <canvas id="myD"></canvas>
+              </div>
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+</mat-grid-list>
 </div>

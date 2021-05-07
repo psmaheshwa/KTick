@@ -1,4 +1,37 @@
-.title:hover{
-    color: pink;
+.title{
+    font-size:30px;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bolder;
+    margin-left: 440px;
 
+}
+#btns{
+    margin-top: 20px;
+    color: white;
+    padding-left: 5px;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+}
+#navbar{
+    background-color: #1F3F49;
+}
+#tool{
+    background-color: #6AB187;
+}
+
+#btns:hover{
+    color: black;
+}
+#menu:hover
+{
+color: black;
+}
+#menu{
+    background-color:  #1F3F49;
+}
+.screen{
+    background-color: #CED2CC;
+}
+.logo{
+    margin-left: 5px;
 }

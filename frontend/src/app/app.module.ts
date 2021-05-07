@@ -1,4 +1,4 @@
-import {NgModule} from '@angular/core';
+import {NgModule, NO_ERRORS_SCHEMA} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 
 import {AppRoutingModule} from './app-routing.module';
@@ -15,12 +15,14 @@ import {TicketsModule} from "./tickets/tickets.module";
 import {CreateTicketService} from "./services/create-ticket.service";
 import { CreateTicketFormComponent } from './tickets/create-ticket-form/create-ticket-form.component';
 import {ApiInterceptor} from "./shared/api.interceptor";
+import { ProjectComponent } from './project/project.component';
 
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ProjectComponent
   ],
   imports: [
     BrowserModule,
@@ -34,7 +36,9 @@ import {ApiInterceptor} from "./shared/api.interceptor";
     UserModule,
     TicketsModule,
     MaterialModule,
+    
   ],
+  schemas: [ NO_ERRORS_SCHEMA ],
   providers: [
     CreateTicketService,
     {

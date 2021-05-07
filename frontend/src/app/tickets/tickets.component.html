@@ -1,7 +1,7 @@
 <div style="width: 100%">
-  <mat-form-field appearance="fill">
-    <button mat-raised-button color="accent">Project</button>
-    <mat-select id="project" [(ngModel)]="selectedProject" (click)="refreshTable()">
+  <mat-form-field id="project">
+    <button mat-raised-button id="btns">Project</button>
+    <mat-select id="project" [(ngModel)]="selectedProject" (click)="onclick()">
       <mat-option>All</mat-option>
       <mat-option *ngFor="let project of projects" [value]="project">{{project}}</mat-option>
     </mat-select>
@@ -11,8 +11,8 @@
       <mat-button-toggle-group  appearance="legacy"   [(value)] = "selectedValue" #group="matButtonToggleGroup" multiple=false>
         <mat-button-toggle class="tbutton" value="bold" *ngFor="let item of toggleOptions;" (change)="selectionChanged($event)" (click)="onclick()" [value]="item">{{item}}</mat-button-toggle>      </mat-button-toggle-group>
     </li>
-    <li id="add">
-      <button mat-mini-fab color="accent"(click)="onCreate()">+</button>
+    <li >
+      <button id="add" mat-mini-fab color="primary"(click)="onCreate()"> + </button>
     </li>
   </ul>
   <div style="width:50%">
@@ -22,15 +22,12 @@
     </mat-form-field>
 
     <table id="Ttable" mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
-
-
-
       <ng-container matColumnDef="title">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Title</th>
         <td mat-cell *matCellDef="let element"> {{element.title}} </td>
       </ng-container>
 
-      <ng-container matColumnDef="description">
+      <ng-container id="description" matColumnDef="description">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Description</th>
         <td mat-cell *matCellDef="let element"> {{element.description}} </td>
       </ng-container>
@@ -59,12 +56,22 @@
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Status</th>
         <td mat-cell *matCellDef="let element"> {{element.status}} </td>
       </ng-container>
-      <ng-container matColumnDef="actions">
-       <th md-header-cell *matHeaderCellDef mat-sort-header> Actions </th>
-       <td md-cell *matCellDef="let row" >
-             <button md-raised-button >Edit</button> 
+      <ng-container matColumnDef="edit">
+        <th md-header-cell *matHeaderCellDef mat-sort-header>   </th>
+        <td md-cell *matCellDef="let row" >
+          <button mat-icon-button matTooltip="Click to Edit" class="iconbutton" color="primary" (click)="onEdit(row)">
+            <mat-icon aria-label="Edit">edit</mat-icon>
+          </button>
         </td>
-    </ng-container> 
+      </ng-container>
+          <ng-container matColumnDef="delete">
+            <th md-header-cell *matHeaderCellDef mat-sort-header>   </th>
+            <td md-cell *matCellDef="let row" >
+        <button mat-icon-button matTooltip="Click to Delete" class="iconbutton" color="warn" (click)="delete(row.id)">
+            <mat-icon aria-label="Delete">delete</mat-icon>
+          </button>
+          </td>
+     </ng-container>
 
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>

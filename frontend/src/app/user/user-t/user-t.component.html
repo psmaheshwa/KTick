@@ -1,0 +1,32 @@
+<form [formGroup]="userService.form" class="normal-form">
+  <mat-grid-list cols="1" rowHeight="600px">
+    <mat-grid-tile>
+      <div class="controls-container">
+        <input type="hidden" formControlName="id">
+        <input type="hidden" formControlName="uniqueId">
+        <mat-form-field id="name">
+          <input formControlName="name" matInput placeholder="Name*">
+        </mat-form-field>
+
+        <mat-form-field id="email">
+          <input formControlName="email" matInput placeholder="email">
+        </mat-form-field>
+
+        <mat-form-field id="role">
+          <mat-label>Role</mat-label>
+          <mat-select formControlName="role">
+            <ng-container *ngFor="let role of roles">
+              <mat-option value="{{role}}">{{role}}</mat-option>
+            </ng-container>
+          </mat-select>
+        </mat-form-field>
+
+        <button id="submit" mat-raised-button color="accent" type="submit" (click)="onSubmit()">Submit
+        </button>
+      </div>
+    </mat-grid-tile>
+
+  </mat-grid-list>
+</form>
+
+

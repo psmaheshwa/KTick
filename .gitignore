@@ -1,11 +1,11 @@
 # Project exclude paths
 /api/node_modules/
 /api/config.env
-<<<<<<< HEAD
 /api/utils/config.js
 /frontend/node_modules
-=======
 /bot-api/node_modules
+/bot-api/config.js
+/teams-bot/node_modules
+/teams-bot/.env
 
 
->>>>>>> c65df6d3072c0fd40ac9ff341d96a562b2fb7b0f
