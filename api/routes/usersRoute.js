@@ -4,7 +4,7 @@ const {ensureAuthenticated, restrictTo} = require('./../controller/authControlle
 const userController = require('./../controller/userController');
 
 router
-    .route('/').get( ensureAuthenticated,userController.allUsers)
+    .route('/').get(userController.allUsers)
     .post(userController.createUser);
 
 router
@@ -13,3 +13,6 @@ router
     .delete(ensureAuthenticated, restrictTo('admin'),userController.deleteUser);
 
 module.exports = router;
+
+// ToDo
+// Removed ensureAuthenticated from get all user request add it back

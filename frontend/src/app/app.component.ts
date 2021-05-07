@@ -17,12 +17,17 @@ export class AppComponent {
     {path: '/users', icon: 'person', title: 'Users'},
   ];
 
+  accessToken = this.authService.getAccess_token();
+
   isAuthenticated$ = this.authService.isAuthenticated$.pipe(shareReplay(1));
 
   constructor(private authService: AuthService) {
   }
 
+  
+
   logout() {
     this.authService.logout();
   }
+ 
 }
