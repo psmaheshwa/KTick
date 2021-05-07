@@ -1,66 +1,25 @@
-// Import modules
 const express = require('express');
-const dialogflow = require('dialogflow');
-require('dotenv').config();
+const {WebhookClient} = require('dialogflow-fulfillment');
 
-// Build express router
+// Import Intent handlers
+testingIntentHandler = require('../intentHandlers/testingIntent');
+ticketsAssignedIntentHandler = require('../intentHandlers/ticketAssignedIntent');
+
 const router = express.Router();
 
-// Create a new session for dialogflow
-const sessionClient = new dialogflow.SessionsClient();
-const sessionPath = sessionClient.sessionPath(process.env.googleProjectID,process.env.dialogFlowSessionID);
+router.post('/',(req,res)=>{
+    // making agent to listen to webhook
+    let agent = new WebhookClient({request:req,response:res});
+    console.log(req.body.originalDetectIntentRequest.payload);
  
-// Text Query Route
-router.post('/textQuery',async(req,res) => {
-    // build request to send to dialogflow
-    const request = {
-      session: sessionPath,
-      queryInput: {
-        text: {
-          // The query to send to the dialogflow agent
-          text: req.body.text,
-          // The language used by the client (en-US)
-          languageCode: process.env.dialogFlowSessionLanguageCode,
-        },
-      },
-    };
-   
-    // Send request 
-    const responses = await sessionClient.detectIntent(request);
-    console.log('Detected intent');
-    const result = responses[0].queryResult;
-    console.log(`  Query: ${result.queryText}`);
-    console.log(`  Response: ${result.fulfillmentText}`);
-  
-    // send response to frontend
-    res.send(result);
-});
+    let IntentMap = new Map(); 
 
-// Event Query Router
-router.post('/eventQuery',async(req,res) => {
-    // build request to send to dialogflow
-    const request = {
-      session: sessionPath,
-      queryInput: {
-        event: {
-          // The query to send to the dialogflow agent
-          name: req.body.event,
-          // The language used by the client (en-US)
-          languageCode: process.env.dialogFlowSessionLanguageCode,
-        },
-      },
-    };
-   
-    // Send request 
-    const responses = await sessionClient.detectIntent(request);
-    console.log('Detected intent');
-    const result = responses[0].queryResult;
-    console.log(`  Query: ${result.queryText}`);
-    console.log(`  Response: ${result.fulfillmentText}`);
-  
-    // send response to frontend
-    res.send(result);
-});
+    // Intent Handlers
+    IntentMap.set('TestingIntent',testingIntentHandler);
+    IntentMap.set('ShowTicketsAssignedToMe',ticketsAssignedIntentHandler);
+
+    // make agent to map intents for request
+    agent.handleRequest(IntentMap);
+})
 
 module.exports = router;
-  
