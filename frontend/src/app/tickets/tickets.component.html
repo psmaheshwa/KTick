@@ -1,11 +1,11 @@
 <div style="width: 100%">
-  <mat-form-field id="project">
+  <!--<mat-form-field id="project">
     <button mat-raised-button id="btns">Project</button>
     <mat-select id="project" [(ngModel)]="selectedProject" (click)="onclick()">
       <mat-option>All</mat-option>
       <mat-option *ngFor="let project of projects" [value]="project">{{project}}</mat-option>
     </mat-select>
-  </mat-form-field>
+  </mat-form-field>-->
   <ul class="blist">
     <li id="created">
       <mat-button-toggle-group  appearance="legacy"   [(value)] = "selectedValue" #group="matButtonToggleGroup" multiple=false>
