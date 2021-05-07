@@ -176,3 +176,34 @@ exports.deleteTicket = catchAsync(async (req, res, next) => {
         data: null
     })
 });
+exports.weeklyData = catchAsync(async (req, res, next) => {
+    let days = [];
+
+    for (let i = 0; i < 7; i++) {
+        var start = new Date();
+        start.setDate(start.getDate() - i);
+        start.setHours(0, 0, 0, 0);
+        var end = new Date();
+        end.setDate(end.getDate() - i);
+        end.setHours(23, 59, 59, 999);
+        const Open = await Ticket.countDocuments({
+            'createdOn': {$gte: start, $lt: end},
+            'status': 'Open',
+            'assignedTo': req.user.id
+        });
+
+        const Close = await Ticket.countDocuments({
+            'createdOn': {$gte: start, $lt: end},
+            'status': 'Close',
+            'assignedTo': req.user.id
+        });
+        const total = await Ticket.countDocuments({
+            'createdOn': {$gte: start, $lt: end},
+            'assignedTo': req.user.id
+        });
+        days.push({Open, Close, total})
+    }
+    res.status(200).json({
+        days
+    });
+});
