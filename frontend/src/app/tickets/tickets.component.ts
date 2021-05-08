@@ -66,7 +66,7 @@ export class TicketsComponent implements OnInit {
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     dialogConfig.width = "60%";
-    dialogConfig.height = "60%";
+    
     
     this.dialog.open(CreateTicketFormComponent, dialogConfig);
     this.dialog.afterAllClosed.subscribe(result => {

@@ -1,6 +1,6 @@
-<form [formGroup]="createTicketService.form" class="normal-form">
+<mat-dialog-content><form [formGroup]="createTicketService.form" class="normal-form">
   <div class="controls-container">
-  <mat-grid-list cols="3" rowHeight="3:1">
+  <mat-grid-list cols="3" rowHeight=100px>
     <mat-grid-tile colspan="1">
      <input type="hidden" formControlName="id">
         <mat-form-field id="project">
@@ -73,6 +73,8 @@
       </mat-grid-tile>
 </mat-grid-list>
 </div>
-</form>
 
-{{createTicketService.form.value | json}}
+</form>
+</mat-dialog-content>
+
+
