@@ -3,7 +3,6 @@ import {BreakpointObserver, Breakpoints} from "@angular/cdk/layout";
 import {map} from "rxjs/operators";
 import {CardService} from '../services/card.service';
 import {Chart, registerables} from "chart.js";
-import {formatDate} from "@angular/common";
 import {ApiService} from "../shared/api.service";
 
 

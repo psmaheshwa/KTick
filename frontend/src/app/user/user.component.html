@@ -1,4 +1,4 @@
-<div style="width: 50%">
+<div style="margin-right: 2%; margin-left: 2%">
   <mat-form-field id="filter">
     <mat-label>Filter</mat-label>
     <input matInput (keyup)="applyFilter($event)" placeholder="Ex. user@company.com" #input>
@@ -6,8 +6,13 @@
 
   <table id="Utable" mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
 
+    <ng-container matColumnDef="index">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> No. </th>
+      <td mat-cell *matCellDef="let element; let i = index;">{{i+1}}</td>
+    </ng-container>
+
     <ng-container matColumnDef="uniqueId">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header> No.</th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> ID</th>
       <td mat-cell *matCellDef="let element"> {{element.uniqueId}} </td>
     </ng-container>
 

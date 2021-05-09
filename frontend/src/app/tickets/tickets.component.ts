@@ -66,8 +66,8 @@ export class TicketsComponent implements OnInit {
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     dialogConfig.width = "60%";
-    
-    
+
+
     this.dialog.open(CreateTicketFormComponent, dialogConfig);
     this.dialog.afterAllClosed.subscribe(result => {
       this.onclick();
@@ -76,7 +76,7 @@ export class TicketsComponent implements OnInit {
 
   onclick() {
     if (this.selectedValue == 'Assigned') {
-      this.displayedColumns = ['title', 'description', 'createdBy', 'createdOn', 'dueDate', 'priority', 'status', 'edit'];
+      this.displayedColumns = ['index', 'title', 'description', 'project', 'createdBy', 'createdOn', 'dueDate', 'priority', 'status', 'edit'];
       this.apiService.assigned().subscribe(response => {
         this.dataSource = new MatTableDataSource(response['data']['tickets']);
         this.dataSource.sort = this.sort;
@@ -91,12 +91,12 @@ export class TicketsComponent implements OnInit {
   }
 
   created() {
-    this.displayedColumns = ['title', 'description', 'assignedTo', 'createdOn', 'dueDate', 'priority', 'status', 'edit', 'delete'];
+    this.displayedColumns = ['index', 'title', 'description', 'project', 'assignedTo', 'createdOn', 'dueDate', 'priority', 'status', 'edit', 'delete'];
     this.apiService.created().subscribe(response => {
       this.dataSource = new MatTableDataSource(response['data']['tickets']);
       this.dataSource.sort = this.sort;
       this.dataSource.paginator = this.paginator;
-    })
+    });
   }
 
   delete(id) {
