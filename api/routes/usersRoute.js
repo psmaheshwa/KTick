@@ -4,7 +4,7 @@ const {ensureAuthenticated, restrictTo} = require('./../controller/authControlle
 const userController = require('./../controller/userController');
 
 router
-    .route('/').get(userController.allUsers)
+    .route('/').get(ensureAuthenticated,userController.allUsers)
     .post(userController.createUser);
 
 router
