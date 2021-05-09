@@ -29,9 +29,9 @@ export class UserComponent implements AfterViewInit, OnInit {
 
   ngOnInit(): void {
     if(this.auth.getIsAdmin() == 'admin'){
-      this.displayedColumns = ['uniqueId', 'name', 'role', 'email', 'edit', 'delete'];
+      this.displayedColumns = ['index','uniqueId', 'name', 'role', 'email', 'edit', 'delete'];
     }else{
-      this.displayedColumns = ['uniqueId', 'name', 'role', 'email'];
+      this.displayedColumns = ['index','uniqueId', 'name', 'role', 'email'];
     }
     this.apiService.getAllUsers().subscribe(response => {
       this.dataSource = new MatTableDataSource(response['data']['users']);

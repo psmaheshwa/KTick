@@ -6,7 +6,7 @@
    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
    font-weight: bold;
     color: black;
-   
+
 }
 ul{
    display: inline;
@@ -20,28 +20,17 @@ li{
     padding-left: 20px;
     padding-top: 10px;
 }
-#Ttable{
-   margin-top: 2%;
-   margin-left: 5%;
-   width:60%;
-   border-radius: 20px;
-   background-color:  #A5D8DD;
-}
-.description{
-    width: 60px;
-}
+
 #filter{
-   margin-left: 5%;
-    width: 20%;
+  margin-top: 1%;
     font-family: 'Courier New', Courier, monospace;
     font-style: italic;
 }
 #pgn{
     margin-top: 2%;
-    margin-left: 25%;
     background-color:  #A5D8DD;
     border-radius: 5px;
-    box-shadow:50px;
+    box-shadow: 50px;
 }
 #project{
     width:80px;
@@ -55,11 +44,60 @@ li{
     color: white;
     font-family:'Courier New', Courier, monospace;
     font-weight: bolder;
-    
+
 }
 .ng-container{
     width: 120px;
 }
 .th{
     font-weight: lighter;
+}
+table{
+  margin-top: 2%;
+  background-color:  #A5D8DD;
+  table-layout: fixed;
+  width: 100%;
+  white-space: nowrap;
+}
+td{
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: small;
+}
+#row-title{
+  width: 15%;
+}
+#row-description{
+  width: 20%;
+}
+#row-assigned{
+  width: 16%;
+}
+#row-created-on{
+  width: 8%;
+}
+#row-delete{
+  width: 4%;
+}
+#row-edit{
+  width: 4%;
+}
+#row-status{
+  width: 5%;
+}
+#row-priority{
+  width: 5%;
+}
+#row-dueDate{
+  width: 8%;
+}
+#row-sno{
+  width: 5%;
+}
+#row-createdby{
+  width: 16%;
+}
+#row-project{
+  width: 5%;
 }

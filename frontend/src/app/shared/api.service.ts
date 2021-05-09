@@ -116,4 +116,8 @@ export class ApiService {
     return this.http.get<number>(this.baseUri + 'tickets/totalLow');
   }
 
+  weekChart(): Observable<any> {
+    return this.http.get<any>(this.baseUri+'tickets/weekChart')
+  }
+
 }
