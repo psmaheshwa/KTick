@@ -1,12 +1,12 @@
 #project{
     width:100%;
-    
+
     color: black;
     font-weight: bold;
 }
 #title{
     width:100%;
-   
+
     color: black;
     font-weight: bold;
     margin-left: 8%;
@@ -15,24 +15,24 @@
     width:80%;
    padding-right: 20px;
    margin-right: 60px;
-   
+
     color: black;
     font-weight: bold;
     margin-left: 8%;
 }
 #At{
     width:100%;
-   
+
     color: black;
     font-weight: bold;
-    
+
 }
 #priority{
     width:100%;
     margin-right: 70px;
     color: black;
     font-weight: bold;
-    
+
 }
 #desc{
     width:85%;
@@ -40,11 +40,11 @@
   padding-left: 10px;
     color: black;
     font-weight: bold;
-    
+
 }
 #date{
     width:100%;
-   
+
     color: black;
     font-weight: bold;
     margin-left: 8%;
@@ -82,7 +82,7 @@
     background-color: rgb(13,160,197);
     color: black;
 }
-#placeholder{
+.placeholder{
 font-family: 'Courier New', Courier, monospace;
 font-style: italic;
 }

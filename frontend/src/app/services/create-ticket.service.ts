@@ -14,7 +14,7 @@ export class CreateTicketService {
     id: new FormControl(null),
     projectID: new FormControl('', Validators.required),
     title: new FormControl('', [Validators.required,Validators.minLength(10)]),
-    status: new FormControl({value: 'Open', disabled: true}, Validators.required),
+    status: new FormControl({value: 'Open'}, Validators.required),
     assignedTo: new FormControl('', Validators.required),
     priority: new FormControl('', Validators.required),
     dueDate: new FormControl('', Validators.required),
@@ -43,10 +43,9 @@ export class CreateTicketService {
     this.apiservice.deleteTicket(row).subscribe();
   }
 
-  populateForm(row) {
-    this.apiservice.getTicketById(row).subscribe(response => {
+ populateForm(row) {
+   this.apiservice.getTicketById(row).subscribe(response => {
       let ticket = response['data'];
-      console.log(ticket)
       this.form.setValue({id:ticket.id,
         projectID: ticket.projectID['id'],
         title: ticket.title,

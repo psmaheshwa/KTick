@@ -31,7 +31,6 @@ export class CreateTicketFormComponent implements OnInit {
   ngOnInit(): void {
     this.apiService.getProjects().subscribe(response => {
       this.projects = response['data']['projects'];
-
     });
     this.apiService.getAllUsers().subscribe(response => {
       this.users = response['data']['users'];
@@ -50,14 +49,9 @@ export class CreateTicketFormComponent implements OnInit {
       this.createTicketService.createTicket();
     }
       this.dialog.close();
-      this.createTicketService.form.reset();
-      this.createTicketService.initializeFormGroup();
-      this.onClose();
   }
 
   onClose() {
-    this.createTicketService.form.reset();
-    this.createTicketService.initializeFormGroup();
     this.dialog.close();
   }
 }
