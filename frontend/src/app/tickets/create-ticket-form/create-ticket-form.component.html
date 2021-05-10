@@ -5,7 +5,7 @@
      <input type="hidden" formControlName="id">
         <mat-form-field id="project">
           <mat-label>Project</mat-label>
-          <mat-select formControlName="projectID" placeholder="Project*" [disabled]="createTicketService.form.value.id && createTicketService.form.value.createdBy != loggedInUser" class="placeholder">
+          <mat-select formControlName="projectID" placeholder="Project*" [disabled]="(createTicketService.form.value.createdBy!='' && createTicketService.form.value.createdBy != loggedInUser)" class="placeholder">
             <ng-container *ngFor="let project of projects">
               <mat-option value="{{project.id}}">{{project.title}}</mat-option>
             </ng-container>
@@ -15,7 +15,7 @@
     </mat-grid-tile>
     <mat-grid-tile colspan="2">
         <mat-form-field id="title">
-          <input formControlName="title" matInput [readonly]="createTicketService.form.value.id && createTicketService.form.value.createdBy != loggedInUser" placeholder="Title*" class="placeholder">
+          <input formControlName="title" matInput [readonly]="(createTicketService.form.value.createdBy!='' && createTicketService.form.value.createdBy != loggedInUser)" placeholder="Title*" class="placeholder">
           <mat-error *ngIf="createTicketService.form.controls['title'].errors?.required">This field is mandatory</mat-error>
           <mat-error *ngIf="createTicketService.form.controls['title'].errors?.minlength">Title can't be less than 10 character</mat-error>
         </mat-form-field>
@@ -32,7 +32,7 @@
       </mat-grid-tile>
       <mat-grid-tile colspan="2">
         <mat-form-field id="desc">
-          <textarea matInput [readonly]="createTicketService.form.value.id && createTicketService.form.value.createdBy != loggedInUser" formControlName="description" matInput placeholder="Description*" class="placeholder"></textarea>
+          <textarea matInput [readonly]="(createTicketService.form.value.createdBy!='' && createTicketService.form.value.createdBy != loggedInUser)" formControlName="description" matInput placeholder="Description*" class="placeholder"></textarea>
           <mat-error *ngIf="createTicketService.form.controls['description'].errors?.required">This field is mandatory</mat-error>
           <mat-error *ngIf="createTicketService.form.controls['description'].errors?.minlength">Description can't be less than 10 character</mat-error>
         </mat-form-field>
@@ -56,14 +56,14 @@
     </mat-grid-tile>
       <mat-grid-tile colspan="2">
         <mat-form-field id="date" appearance="fill">
-          <input matInput formControlName="dueDate" [disabled]="createTicketService.form.value.id && createTicketService.form.value.createdBy != loggedInUser" [matDatepicker]="picker" placeholder="Due date" class="placeholder">
+          <input matInput formControlName="dueDate" [disabled]="(createTicketService.form.value.createdBy!='' && createTicketService.form.value.createdBy != loggedInUser)" [matDatepicker]="picker" placeholder="Due date" class="placeholder">
           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker  #picker></mat-datepicker>
         </mat-form-field>
       </mat-grid-tile>
       <mat-grid-tile colspan="1">
         <mat-form-field id="priority">
-          <mat-select formControlName="priority" placeholder="Priority*" [disabled]="createTicketService.form.value.id && createTicketService.form.value.createdBy != loggedInUser" class="placeholder">
+          <mat-select formControlName="priority" placeholder="Priority*" [disabled]="(createTicketService.form.value.createdBy!='' && createTicketService.form.value.createdBy != loggedInUser)" class="placeholder">
             <ng-container *ngFor="let priority of priorities">
               <mat-option value="{{priority}}">{{priority}}</mat-option>
             </ng-container>
