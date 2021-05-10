@@ -4,6 +4,7 @@ import {MatDialogRef} from '@angular/material/dialog';
 import {ApiService} from "../../shared/api.service";
 import {Project} from "../../project/project";
 import {User} from "../../user/user";
+import {AuthService} from "../../shared/auth.service";
 
 
 
@@ -17,10 +18,12 @@ export class CreateTicketFormComponent implements OnInit {
   constructor(
     public createTicketService: CreateTicketService,
     private dialog: MatDialogRef<CreateTicketFormComponent>,
-    private apiService: ApiService
+    private apiService: ApiService,
+    private authService: AuthService
   ) {
   }
 
+  loggedInUser = this.authService.getUserID();
   status = ['Open', 'In Process', 'Close'];
   defaultStatus = "Open";
   priorities = ['Low', 'Medium', 'High'];

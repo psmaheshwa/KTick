@@ -13,12 +13,14 @@ export class CreateTicketService {
   form: FormGroup = new FormGroup({
     id: new FormControl(null),
     projectID: new FormControl('', Validators.required),
-    title: new FormControl('', [Validators.required,Validators.minLength(10)]),
+    title: new FormControl('', [Validators.required, Validators.minLength(10)]),
     status: new FormControl({value: 'Open'}, Validators.required),
     assignedTo: new FormControl('', Validators.required),
     priority: new FormControl('', Validators.required),
     dueDate: new FormControl('', Validators.required),
-    description: new FormControl('',[Validators.required,Validators.minLength(10)]),
+    description: new FormControl('', [Validators.required, Validators.minLength(10)]),
+    comment: new FormControl(''),
+    createdBy: new FormControl({value: '', disable: true})
   });
 
   initializeFormGroup() {
@@ -30,7 +32,9 @@ export class CreateTicketService {
       assignedTo: '',
       priority: '',
       dueDate: '',
-      description: ''
+      description: '',
+      comment: '',
+      createdBy: ''
     });
   }
 
@@ -43,23 +47,27 @@ export class CreateTicketService {
     this.apiservice.deleteTicket(row).subscribe();
   }
 
- populateForm(row) {
-   this.apiservice.getTicketById(row).subscribe(response => {
+  populateForm(row) {
+    this.apiservice.getTicketById(row).subscribe(response => {
       let ticket = response['data'];
-      this.form.setValue({id:ticket.id,
+      this.form.setValue({
+        id: ticket.id,
         projectID: ticket.projectID['id'],
         title: ticket.title,
         status: ticket.status,
         assignedTo: ticket.assignedTo['id'],
         priority: ticket.priority,
         dueDate: ticket.dueDate,
-        description: ticket.description});
+        description: ticket.description,
+        comment: ticket.comment,
+        createdBy: ticket.createdBy.email
+      });
     });
   }
 
-  updateTicket(id){
+  updateTicket(id) {
     console.log(id)
-    this.apiservice.updateTicket(id,this.form.value).subscribe();
+    this.apiservice.updateTicket(id, this.form.value).subscribe();
   }
 
 }
