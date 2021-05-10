@@ -9,9 +9,9 @@ export class CardService {
   constructor(private apiService: ApiService) {
   }
 
-  cards = Array.from([{title: 'Assigned Tickets', numbers: 0},
-    {title: 'Total Open', numbers: 0},
-    {title: 'Total Resolved', numbers: 0},
+  cards = Array.from([{title: 'Assigned', numbers: 0},
+    {title: 'Open', numbers: 0},
+    {title: 'Resolved', numbers: 0},
     {title: 'Today Due', numbers: 0},
     {title: 'Due Exceeded', numbers: 0},
     {title: 'Total High', numbers: 0},
