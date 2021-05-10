@@ -54,7 +54,7 @@ export class AuthService {
       this.msalService.instance.setActiveAccount(res.account);
       AuthService.setIsAuthenticated(true);
       this.setAccess_token(res.idToken);
-      this.setUserID(res.uniqueId)
+      this.setUserID(res.account.username)
       this.router.navigateByUrl('/dashboard').then(r => {
         this.isAuthenticated.next(true);
       });

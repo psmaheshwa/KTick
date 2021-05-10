@@ -4,6 +4,7 @@ import {MatDialogRef} from '@angular/material/dialog';
 import {ApiService} from "../../shared/api.service";
 import {Project} from "../../project/project";
 import {User} from "../../user/user";
+import {AuthService} from "../../shared/auth.service";
 
 
 
@@ -17,10 +18,12 @@ export class CreateTicketFormComponent implements OnInit {
   constructor(
     public createTicketService: CreateTicketService,
     private dialog: MatDialogRef<CreateTicketFormComponent>,
-    private apiService: ApiService
+    private apiService: ApiService,
+    private authService: AuthService
   ) {
   }
 
+  loggedInUser = this.authService.getUserID();
   status = ['Open', 'In Process', 'Close'];
   defaultStatus = "Open";
   priorities = ['Low', 'Medium', 'High'];
@@ -31,7 +34,6 @@ export class CreateTicketFormComponent implements OnInit {
   ngOnInit(): void {
     this.apiService.getProjects().subscribe(response => {
       this.projects = response['data']['projects'];
-
     });
     this.apiService.getAllUsers().subscribe(response => {
       this.users = response['data']['users'];
@@ -50,14 +52,9 @@ export class CreateTicketFormComponent implements OnInit {
       this.createTicketService.createTicket();
     }
       this.dialog.close();
-      this.createTicketService.form.reset();
-      this.createTicketService.initializeFormGroup();
-      this.onClose();
   }
 
   onClose() {
-    this.createTicketService.form.reset();
-    this.createTicketService.initializeFormGroup();
     this.dialog.close();
   }
 }
