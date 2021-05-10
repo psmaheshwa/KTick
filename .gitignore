@@ -7,6 +7,6 @@
 /bot-api/.env
 /teams-bot/node_modules
 /teams-bot/.env
-
+/teams/.env
 
 
