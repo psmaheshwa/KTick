@@ -23,19 +23,19 @@ exports.totalClosed = catchAsync(async (req, res, next) => {
 });
 
 exports.totalHigh = catchAsync(async (req, res, next) => {
-    req.query = {'priority': 'High', 'assignedTo': req.user.id};
+    req.query = {'priority': 'High', 'status': 'Open', 'assignedTo': req.user.id};
     const count = await Ticket.countDocuments(req.query);
     res.status(200).json({count})
 });
 
 exports.totalMedium = catchAsync(async (req, res, next) => {
-    req.query = {'priority': 'Medium', 'assignedTo': req.user.id};
+    req.query = {'priority': 'Medium', 'status': 'Open', 'assignedTo': req.user.id};
     const count = await Ticket.countDocuments(req.query);
     res.status(200).json({count})
 });
 
 exports.totalLow = catchAsync(async (req, res, next) => {
-    req.query = {'priority': 'Low', 'assignedTo': req.user.id};
+    req.query = {'priority': 'Low', 'status': 'Open', 'assignedTo': req.user.id};
     const count = await Ticket.countDocuments(req.query);
     res.status(200).json({count});
 });

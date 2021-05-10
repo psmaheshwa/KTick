@@ -48,6 +48,9 @@ const ticketSchema = new mongoose.Schema({
         type: Date,
         default: new Date(+new Date() + 24*60*60*1000)
 
+    },
+    comment: {
+        type: String
     }
 },{
     toJSON: { virtuals : true},
