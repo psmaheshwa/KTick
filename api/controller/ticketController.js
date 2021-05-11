@@ -42,24 +42,28 @@ exports.totalLow = catchAsync(async (req, res, next) => {
 
 exports.todayTickets = catchAsync(async (req, res, next) => {
     const start = new Date();
-    start.setHours(0,0,0,0);
+    start.setHours(0, 0, 0, 0);
     const end = new Date();
-    end.setHours(23,59,59,999);
-    const count = await Ticket.countDocuments({'dueDate':{$gte: start,$lt: end}, 'status':'Open','assignedTo': req.user.id});
+    end.setHours(23, 59, 59, 999);
+    const count = await Ticket.countDocuments({
+        'dueDate': {$gte: start, $lt: end},
+        'status': 'Open',
+        'assignedTo': req.user.id
+    });
     res.status(200).json({count})
 });
 
 exports.dueExceeded = catchAsync(async (req, res, next) => {
     const start = new Date();
-    start.setHours(0,0,0,0);
+    start.setHours(0, 0, 0, 0);
     const end = new Date();
-    end.setHours(23,59,59,999);
-    const count = await Ticket.countDocuments({'dueDate':{$lte: start}, 'status':'Open', 'assignedTo': req.user.id});
+    end.setHours(23, 59, 59, 999);
+    const count = await Ticket.countDocuments({'dueDate': {$lte: start}, 'status': 'Open', 'assignedTo': req.user.id});
     res.status(200).json({count})
 });
 
 
-exports.totalAssigned = catchAsync(async (req,res,next) =>{
+exports.totalAssigned = catchAsync(async (req, res, next) => {
     const count = await Ticket.countDocuments({'assignedTo': req.user.id});
     res.status(200).json({count})
 })
@@ -75,7 +79,7 @@ exports.assignedToMe = (req, res, next) => {
 }
 
 exports.allTickets = catchAsync(async (req, res, next) => {
-    const features = new ApiFeatures(Ticket.find().populate(['createdBy','assignedTo','projectID']), req.query)
+    const features = new ApiFeatures(Ticket.find().populate(['createdBy', 'assignedTo', 'projectID']), req.query)
         .filter()
         .sort()
         .limitFields()
@@ -92,7 +96,7 @@ exports.allTickets = catchAsync(async (req, res, next) => {
 });
 
 exports.assigned = catchAsync(async (req, res, next) => {
-    const features = new ApiFeatures(Ticket.find({'assignedTo':req.user.id}).populate(['createdBy','assignedTo','projectID']), req.query)
+    const features = new ApiFeatures(Ticket.find({'assignedTo': req.user.id}).populate(['createdBy', 'assignedTo', 'projectID']), req.query)
         .filter()
         .sort()
         .limitFields()
@@ -109,7 +113,7 @@ exports.assigned = catchAsync(async (req, res, next) => {
 });
 
 exports.created = catchAsync(async (req, res, next) => {
-    const features = new ApiFeatures(Ticket.find({'createdBy':req.user.id}).populate(['createdBy','assignedTo','projectID']), req.query)
+    const features = new ApiFeatures(Ticket.find({'createdBy': req.user.id}).populate(['createdBy', 'assignedTo', 'projectID']), req.query)
         .filter()
         .sort()
         .limitFields()
@@ -141,7 +145,7 @@ exports.createTicket = catchAsync(async (req, res, next) => {
 });
 
 exports.getTicket = catchAsync(async (req, res, next) => {
-    const ticket = await Ticket.findById(req.params.id).populate(['createdBy','assignedTo','projectID']);
+    const ticket = await Ticket.findById(req.params.id).populate(['createdBy', 'assignedTo', 'projectID']);
     if (!ticket) {
         return next(new AppError('Ticket not found', 404));
     }
@@ -181,10 +185,10 @@ exports.weeklyData = catchAsync(async (req, res, next) => {
     let days = [];
 
     for (let i = 0; i < 7; i++) {
-        var start = new Date();
+        let start = new Date();
         start.setDate(start.getDate() - i);
         start.setHours(0, 0, 0, 0);
-        var end = new Date();
+        let end = new Date();
         end.setDate(end.getDate() - i);
         end.setHours(23, 59, 59, 999);
         const Open = await Ticket.countDocuments({
