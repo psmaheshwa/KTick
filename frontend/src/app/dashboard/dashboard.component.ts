@@ -92,13 +92,7 @@ export class DashboardComponent implements OnInit {
         type: "line",
         data: {
           labels: [days[6], days[5], days[4], days[3], days[2], days[1], 'Today'],
-          datasets: [{
-            label: 'Total Tickets',
-            data: [this.weekData[6].total, this.weekData[5].total, this.weekData[4].total, this.weekData[3].total, this.weekData[2].total, this.weekData[1].total, this.weekData[0].total],
-            backgroundColor: '#ff0695',
-            borderColor: '#ff0695',
-            fill: false,
-          },
+          datasets: [
             {
               label: 'Open Tickets',
               data: [this.weekData[6].Open, this.weekData[5].Open, this.weekData[4].Open, this.weekData[3].Open, this.weekData[2].Open, this.weekData[1].Open, this.weekData[0].Open],

@@ -45,6 +45,14 @@ export class AuthService {
     localStorage.setItem('Access_Token', access_token);
   }
 
+  setUserName(username) {
+    localStorage.setItem('UserName', username);
+  }
+
+  getUserName(): string{
+    return localStorage.getItem('UserName');
+  }
+
   loggedIn(): boolean {
     return AuthService.getIsAuthenticated();
   }
@@ -54,7 +62,8 @@ export class AuthService {
       this.msalService.instance.setActiveAccount(res.account);
       AuthService.setIsAuthenticated(true);
       this.setAccess_token(res.idToken);
-      this.setUserID(res.account.username)
+      this.setUserID(res.account.username);
+      this.setUserName(res.account.name);
       this.router.navigateByUrl('/dashboard').then(r => {
         this.isAuthenticated.next(true);
       });

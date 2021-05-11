@@ -11,9 +11,11 @@
     </span>
   </span>
   <span class="spacer"></span>
-  <button *ngIf="isAuthenticated$ | async" (click)="logout()" class="login menu" mat-mini-fab>
-    <mat-icon>person</mat-icon>
-  </button>
+  <button mat-mini-fab [matMenuTriggerFor]="menu" *ngIf="isAuthenticated$ | async" class="menu"> <mat-icon>person</mat-icon> </button>
+  <mat-menu #menu="matMenu">
+    <a mat-menu-item>{{username}}</a>
+    <button mat-menu-item (click)="logout()" ><mat-icon>reply</mat-icon>Log-Out</button>
+  </mat-menu>
 </mat-toolbar>
 
 <mat-sidenav-container class="screen">
