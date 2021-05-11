@@ -11,7 +11,8 @@ export interface Ticket {
   priority: string,
   status: string,
   projectID: string,
-  dueDate: string
+  dueDate: string,
+  comment: string
 }
 
 

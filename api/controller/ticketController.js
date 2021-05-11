@@ -155,6 +155,7 @@ exports.updateTicket = catchAsync(async (req, res, next) => {
 
     let updatedTicket = req.body;
     updatedTicket.lastEditedOn = Date.now();
+    delete updatedTicket.createdBy;
     await Ticket.findByIdAndUpdate(req.params.id, updatedTicket, {
         new: true,
         runValidators: true

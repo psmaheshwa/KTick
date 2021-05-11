@@ -4,7 +4,8 @@
   "description": "Fulfillment call for dialogflow",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
   },
   "author": "Avinash Singh <avinash.20399@gmail.com>",
   "license": "ISC",
