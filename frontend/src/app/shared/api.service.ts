@@ -113,7 +113,7 @@ export class ApiService {
   }
 
   totalAssigned(): Observable<number> {
-    return this.http.get<number>(this.baseUri + 'tickets/totalLow');
+    return this.http.get<number>(this.baseUri + 'tickets/totalAssigned');
   }
 
   weekChart(): Observable<any> {
