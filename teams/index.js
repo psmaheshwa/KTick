@@ -8,6 +8,7 @@ const restify = require('restify');
 const { BotFrameworkAdapter, ConversationState, MemoryStorage, UserState } = require('botbuilder');
 const { TeamsBot } = require('./bots/teamsBot');
 const { MainDialog } = require('./dialogs/mainDialog');
+const { Bot } = require('./bots/bot');
 
 const adapter = new BotFrameworkAdapter({
     appId: process.env.MicrosoftAppId,
@@ -34,7 +35,7 @@ const conversationState = new ConversationState(memoryStorage);
 const userState = new UserState(memoryStorage);
 
 const dialog = new MainDialog();
-const bot = new TeamsBot(conversationState, userState, dialog);
+//const bot = new TeamsBot(conversationState, userState, dialog);
 
 const server = restify.createServer();
 server.listen(process.env.port || process.env.PORT || 3978, function() {
@@ -43,8 +44,9 @@ server.listen(process.env.port || process.env.PORT || 3978, function() {
     console.log('\nTo talk to your bot, open the emulator select "Open Bot"');
 });
 
-server.post('/api/messages', (req, res) => {
-    console.log(req.headers);
+server.post('/api/messages', (req, res) => {   
+    token = req.headers.authorization.slice(7);
+    bot = new Bot(token)
     adapter.processActivity(req, res, async (context) => {
         await bot.run(context);
     });

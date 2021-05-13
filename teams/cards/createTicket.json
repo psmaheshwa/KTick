@@ -1,0 +1,128 @@
+{
+    "type": "AdaptiveCard",
+    "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+    "version": "1.2",
+    "body": [
+        {
+            "type": "TextBlock",
+            "text": "Project",
+            "wrap": true,
+            "size": "Large",
+            "weight": "Bolder"
+        },
+        {
+            "type": "Input.ChoiceSet",
+            "choices": [
+                {
+                    "title": "KTick",
+                    "value": "6066b4208666214b0de392d7"
+                },
+                {
+                    "title": "Kebs",
+                    "value": "60744c0e1c874f75a828dcfd"
+                }
+            ],
+            "id": "projectID"
+        },
+        {
+            "type": "TextBlock",
+            "text": "Title",
+            "wrap": true,
+            "size": "Large",
+            "weight": "Bolder"
+        },
+        {
+            "type": "Input.Text",
+            "id": "title"
+        },
+        {
+            "type": "TextBlock",
+            "text": "Description",
+            "wrap": true,
+            "size": "Large",
+            "weight": "Bolder"
+        },
+        {
+            "type": "Input.Text",
+            "id": "description",
+            "isMultiline": true
+        },
+        {
+            "type": "TextBlock",
+            "text": "Priority",
+            "wrap": true,
+            "size": "Large",
+            "weight": "Bolder"
+        },
+        {
+            "type": "Input.ChoiceSet",
+            "choices": [
+                {
+                    "title": "High",
+                    "value": "High"
+                },
+                {
+                    "title": "Medium",
+                    "value": "Medium"
+                },
+                {
+                    "title": "Low",
+                    "value": "Low"
+                }
+            ],
+            "id": "priority"
+        },
+        {
+            "type": "TextBlock",
+            "wrap": true,
+            "text": "Assign to",
+            "size": "Large",
+            "weight": "Bolder"
+        },
+        {
+            "type": "Input.ChoiceSet",
+            "choices": [
+                {
+                    "title": "Maheshwaran P",
+                    "value": "606090e2fd8ea9317b719a8b"
+                },
+                {
+                    "title": "Avinash Singh",
+                    "value": "60706f4d43239c2cd03c1166"
+                },
+                {
+                    "title": "Gokul P Menon",
+                    "value": "60730895f1f79f3490fcf568"
+                }
+            ],
+            "id": "assignedTo"
+        },
+        {
+            "type": "TextBlock",
+            "text": "Due Date",
+            "wrap": true,
+            "size": "Large",
+            "weight": "Bolder"
+        },
+        {
+            "type": "Input.Date",
+            "id": "dueDate"
+        },
+        {
+            "type": "Input.Text",
+            "id": "comment",
+            "value": " ",
+            "isVisible": false
+        },
+        {
+            "type": "ActionSet",
+            "actions": [
+                {
+                    "type": "Action.Submit",
+                    "title": "Submit",
+                    "style": "positive"
+                }
+            ]
+        }
+    ]
+}
