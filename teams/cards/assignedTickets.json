@@ -1,0 +1,65 @@
+{
+    "type": "AdaptiveCard",
+    "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+    "version": "1.2",
+    "body": [
+        {
+            "type": "ColumnSet",
+            "columns": [
+                {
+                    "type": "Column",
+                    "width": "auto",
+                    "items": [
+                        {
+                            "type": "TextBlock",
+                            "text": "Ticket Id :",
+                            "wrap": true
+                        },
+                        {
+                            "type": "TextBlock",
+                            "text": "Title :",
+                            "wrap": true
+                        },
+                        {
+                            "type": "TextBlock",
+                            "text": "Priority :",
+                            "wrap": true
+                        },
+                        {
+                            "type": "TextBlock",
+                            "text": "Created By :",
+                            "wrap": true
+                        }
+                    ]
+                },
+                {
+                    "type": "Column",
+                    "width": "auto",
+                    "items": [
+                        {
+                            "type": "TextBlock",
+                            "wrap": true,
+                            "text": "${$root._id}",
+                            "spacing": "Small"
+                        },
+                        {
+                            "type": "TextBlock",
+                            "text": "${$root.title}",
+                            "wrap": true
+                        },
+                        {
+                            "type": "TextBlock",
+                            "text": "${$root.priority}",
+                            "wrap": true
+                        },
+                        {
+                            "type": "TextBlock",
+                            "text": "${$root.createdBy.name}",
+                            "wrap": true
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

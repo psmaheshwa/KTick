@@ -8,5 +8,6 @@
 /teams-bot/node_modules
 /teams-bot/.env
 /teams/.env
+/teams/node_modules
 
 
