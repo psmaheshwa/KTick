@@ -8,6 +8,7 @@
     color: black;
 
 }
+
 ul{
    display: inline;
    margin-top: 20px;
@@ -28,7 +29,7 @@ li{
 }
 #pgn{
     margin-top: 2%;
-    background-color:  #A5D8DD;
+    background-color:  white;
     border-radius: 5px;
     box-shadow: 50px;
 }
@@ -54,7 +55,7 @@ li{
 }
 table{
   margin-top: 2%;
-  background-color:  #A5D8DD;
+  background-color:  #edf7f8;
   table-layout: fixed;
   width: 100%;
   white-space: nowrap;

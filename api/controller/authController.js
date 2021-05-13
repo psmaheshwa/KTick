@@ -10,11 +10,20 @@ exports.ensureAuthenticated = async (req, res, next) => {
 
     if (!profile) return res.sendStatus(403);
     else {
+        let user;
         await User.findOne({uniqueId: profile.oid}).then((currentUser) => {
             if (currentUser) {
-                req.user = currentUser;
+                user = currentUser;
             }
         });
+        if(!user){
+            await User.findOne({oid: profile.oid}).then((currentUser) => {
+                if (currentUser) {
+                    user = currentUser;
+                }
+            });
+        }
+        req.user = user;
     }
     next();
 }
